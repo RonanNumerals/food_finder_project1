@@ -8,6 +8,7 @@ class Restaurant {
   final List<String> hours;
   final String location;
   final double rating;
+  final int priceLevel; // 1 = $, 2 = $$, 3 = $$$
 
   Restaurant({
     required this.name,
@@ -17,5 +18,8 @@ class Restaurant {
     required this.hours,
     required this.location,
     required this.rating,
+    required this.priceLevel,
   });
+
+  String get priceLabelString => '\$' * priceLevel;
 }

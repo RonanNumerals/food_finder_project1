@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-//import '../screens/home_screen.dart';
+
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Munchies',
-      //home: HomeScreen(),
-    );
+    return MaterialApp(title: 'Munchies', home: const MainScreen());
   }
 }

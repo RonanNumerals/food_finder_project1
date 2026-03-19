@@ -1,11 +1,13 @@
+import 'package:food_finder_project1/models/menu.dart';
+
 class Restaurant {
   final String name;
   final String imagePath;
-  final List<String> menuItems;
+  final List<MenuItem> menuItems;
   final String description;
-  final String hours;
+  final List<String> hours;
   final String location;
-  final int rating;
+  final double rating;
 
   Restaurant({
     required this.name,

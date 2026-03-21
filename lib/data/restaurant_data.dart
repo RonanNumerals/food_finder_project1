@@ -1,3 +1,6 @@
+import '../models/restaurant.dart';
+import '../models/menu.dart';
+
 class RestaurantData {
   static final List<Map<String, dynamic>> restaurants = [
     {
@@ -88,7 +91,8 @@ class RestaurantData {
   ];
 }
 
-/*
+// Typed Restaurant objects for use in UI widgets.
+// Replace with database queries later.
 final List<Restaurant> sampleRestaurants = [
   Restaurant(
     name: 'Baraka Shawarma',
@@ -108,7 +112,6 @@ final List<Restaurant> sampleRestaurants = [
     location: '68 Walton Street Northwest, Atlanta, GA, 30303',
     priceLevel: 1,
   ),
-
   Restaurant(
     name: 'Chick-fil-A',
     imagePath: 'assets/images/chick_fil_a.jpg',
@@ -139,7 +142,6 @@ final List<Restaurant> sampleRestaurants = [
     location: '100 Piedmont Avenue SE Atlanta, GA 30303',
     priceLevel: 1,
   ),
-
   Restaurant(
     name: 'NaanStop',
     imagePath: 'assets/images/naanstop.jpg',
@@ -171,5 +173,3 @@ final List<Restaurant> sampleRestaurants = [
     priceLevel: 2,
   ),
 ];
-<<<<<<< HEAD
-*/

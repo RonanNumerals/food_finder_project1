@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/restaurant.dart';
+import '../screens/restaurant_details_screen.dart';
 
 class RestaurantCard extends StatelessWidget {
   final Restaurant restaurant;
@@ -8,58 +9,72 @@ class RestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Image on the left
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              restaurant.imagePath,
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                RestaurantDetailsScreen(restaurant: restaurant),
           ),
-          const SizedBox(width: 12),
-          // Information container on the right
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Restaurant name
-                Text(
-                  restaurant.name,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                // Hours
-                Text(
-                  restaurant.hours,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-                const SizedBox(height: 4),
-                // Star rating
-                _buildStarRating(restaurant.rating),
-                const SizedBox(height: 4),
-                // Price level
-                Text(
-                  restaurant.priceLabelString,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.green,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
+        );
+      },
+      borderRadius: BorderRadius.circular(8),
+      child: SizedBox(
+        width: double.infinity,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Image on the left
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                restaurant.imagePath.isEmpty
+                    ? 'assets/images/chick_fil_a.jpg'
+                    : restaurant.imagePath,
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(width: 12),
+            // Information container on the right
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Restaurant name
+                  Text(
+                    restaurant.name,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  // Hours
+                  Text(
+                    restaurant.hours,
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  // Star rating
+                  _buildStarRating(restaurant.rating),
+                  const SizedBox(height: 4),
+                  // Price level
+                  Text(
+                    restaurant.priceLabelString,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.green,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

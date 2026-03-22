@@ -5,7 +5,7 @@ class Restaurant {
   final String imagePath;
   final List<MenuItem> menuItems;
   final String description;
-  final List<String> hours;
+  final String hours;
   final String location;
   final double rating;
   final int priceLevel; // 1 = $, 2 = $$, 3 = $$$

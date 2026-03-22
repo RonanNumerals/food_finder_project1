@@ -81,29 +81,27 @@ class DatabaseHelper {
   }
   
   Future<void> _seedRestaurantData(Database db) async {
-    final restaurants = RestaurantData.restaurants;
-
-    for (var restaurant in restaurants) {
+    for (var restaurant in sampleRestaurants) {
       // Insert restaurant
       final restaurantId = await db.insert('restaurants', {
-        'name': restaurant['name'],
-        'image_path': restaurant['image_path'],
-        'description': restaurant['description'],
-        'location': restaurant['location'],
-        'rating': restaurant['rating'],
-        'hours': restaurant['hours'],
+        'name': restaurant.name,
+        'image_path': restaurant.imagePath,
+        'description': restaurant.description,
+        'location': restaurant.location,
+        'rating': restaurant.rating,
+        'hours': restaurant.hours,
       });
 
-      final menuItems = restaurant['menu'] as List;
+      final menuItem = restaurant.menuItems;
 
       final batch = db.batch();
 
-      for (var item in menuItems) {
+      for (var item in menuItem) {
         batch.insert('menu_items', {
           'restaurant_id': restaurantId,
-          'name': item['name'],
-          'description': item['description'],
-          'price': jsonEncode(item['price']),
+          'name': item.name,
+          'description': item.description,
+          'price': jsonEncode(item.price),
         });
       }
 
@@ -117,17 +115,39 @@ class DatabaseHelper {
     return await db.insert('reviews', item);
   }
   
-  // READ - Get all items
+  // READ - Get all reviews
   Future<List<Map<String, dynamic>>> getAllReviews() async {
     final db = await database;
     return await db.query('reviews', orderBy: 'created_at DESC');
   }
   
-  // READ - Get single item by ID
+  // READ - Get single review by ID
   Future<Map<String, dynamic>?> getReview(int id) async {
     final db = await database;
     final results = await db.query(
       'reviews',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return results.isNotEmpty ? results.first : null;
+  }
+
+  // READ - get single menu item by ID
+  Future<Map<String, dynamic>?> getMenuItem(int id) async {
+    final db = await database;
+    final results = await db.query(
+      'menu_items',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return results.isNotEmpty ? results.first : null;
+  }
+
+  // READ - get single restaurant by ID
+  Future<Map<String, dynamic>?> getRestaurant(int id) async {
+    final db = await database;
+    final results = await db.query(
+      'restaurants',
       where: 'id = ?',
       whereArgs: [id],
     );

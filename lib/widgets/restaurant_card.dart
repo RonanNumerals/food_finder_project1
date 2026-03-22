@@ -40,7 +40,7 @@ class RestaurantCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 // Hours
                 Text(
-                  restaurant.hours.first,
+                  restaurant.hours,
                   style: const TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 const SizedBox(height: 4),

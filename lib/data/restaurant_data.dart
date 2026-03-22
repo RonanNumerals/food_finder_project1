@@ -19,6 +19,17 @@ final List<Restaurant> sampleRestaurants = [
     location: '68 Walton Street Northwest, Atlanta, GA, 30303',
     priceLevel: 1,
     cuisine: 'Mediterranean',
+    tags: [
+      'quick bite',
+      'filling',
+      'hangry',
+      'savory',
+      'affordable',
+      'halal',
+      'lunch',
+      'gyro',
+      'shawarma',
+    ],
   ),
   Restaurant(
     name: 'Chick-fil-A',
@@ -50,6 +61,16 @@ final List<Restaurant> sampleRestaurants = [
     location: '100 Piedmont Avenue SE Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'American',
+    tags: [
+      'quick bite',
+      'comfort food',
+      'hangry',
+      'affordable',
+      'chicken',
+      'fast food',
+      'filling',
+      'classic',
+    ],
   ),
   Restaurant(
     name: 'NaanStop',
@@ -81,6 +102,16 @@ final List<Restaurant> sampleRestaurants = [
     location: '64 Broad St NW, Atlanta, GA 30303',
     priceLevel: 2,
     cuisine: 'Indian',
+    tags: [
+      'filling',
+      'flavorful',
+      'hangry',
+      'adventurous',
+      'spicy',
+      'rice bowl',
+      'lunch',
+      'international',
+    ],
   ),
   Restaurant(
     name: 'Land of a Thousand Hills Coffee',
@@ -171,6 +202,17 @@ final List<Restaurant> sampleRestaurants = [
     location: '84 Peachtree St NW, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'Cafe',
+    tags: [
+      'chill',
+      'study spot',
+      'cozy',
+      'coffee',
+      'calm',
+      'work',
+      'aesthetic',
+      'relaxed',
+      'bored',
+    ],
   ),
   Restaurant(
     name: 'Café Lucia',
@@ -277,80 +319,221 @@ final List<Restaurant> sampleRestaurants = [
     location: '57 Forsyth St NW, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'Cafe',
+    tags: [
+      'chill',
+      'cozy',
+      'aesthetic',
+      'brunch',
+      'coffee',
+      'breakfast',
+      'relaxed',
+      'gothic',
+      'study spot',
+      'date',
+    ],
   ),
   Restaurant(
     name: 'Sensational Subs',
     imagePath: '',
     menuItems: [
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
+      MenuItem(
+        name: 'Classic Italian Sub',
+        description:
+            'Genoa salami, ham, pepperoni, provolone, lettuce, tomato, onion, and Italian dressing on a hoagie roll.',
+        price: [8.99, 11.99],
+      ),
+      MenuItem(
+        name: 'Turkey Club',
+        description:
+            'Sliced turkey, bacon, Swiss cheese, lettuce, tomato, and mayo on toasted wheat bread.',
+        price: [9.49, 12.49],
+      ),
+      MenuItem(
+        name: 'Meatball Sub',
+        description:
+            'Homestyle beef meatballs smothered in marinara sauce and melted mozzarella on a toasted hoagie.',
+        price: [8.49, 10.99],
+      ),
     ],
-    description: '',
-    hours: 'Monday - Friday 10:30 AM - 5:00 PM',
-    rating: 0,
-    location: '',
+    description:
+        'A no-frills sub shop serving overstuffed sandwiches with fresh-baked bread and quality ingredients. Quick, filling, and easy on the wallet — perfect for a grab-and-go lunch.',
+    hours: 'Monday - Friday: 10:30 AM - 5:00 PM',
+    rating: 4.1,
+    location: '30 Peachtree St NW, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'American',
+    tags: [
+      'quick bite',
+      'filling',
+      'hangry',
+      'affordable',
+      'lunch',
+      'comfort food',
+      'sandwiches',
+    ],
   ),
   Restaurant(
     name: 'Mr. Hibachi',
     imagePath: '',
     menuItems: [
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
+      MenuItem(
+        name: 'Hibachi Chicken',
+        description:
+            'Tender grilled chicken with fried rice, mixed vegetables, and house yum-yum sauce.',
+        price: [13.99],
+      ),
+      MenuItem(
+        name: 'Hibachi Steak',
+        description:
+            'Seasoned sirloin steak grilled to order, served with fried rice and vegetables.',
+        price: [16.99],
+      ),
+      MenuItem(
+        name: 'Shrimp Tempura',
+        description:
+            'Lightly battered shrimp, deep fried until golden, served with tentsuyu dipping sauce.',
+        price: [10.99],
+      ),
     ],
-    description: '',
-    hours: '',
-    rating: 0,
-    location: '',
-    priceLevel: 1,
+    description:
+        'Bringing the hibachi grill experience to downtown Atlanta. Bold flavors, high heat, and generous portions — from sizzling steak to crispy tempura.',
+    hours: 'Monday - Saturday: 11:00 AM - 9:00 PM',
+    rating: 4.3,
+    location: '45 Broad St NW, Atlanta, GA 30303',
+    priceLevel: 2,
     cuisine: 'Japanese',
+    tags: [
+      'filling',
+      'flavorful',
+      'hangry',
+      'savory',
+      'grilled',
+      'dinner',
+      'adventurous',
+      'international',
+    ],
   ),
   Restaurant(
     name: 'StrikeOut Wingz ATL',
     imagePath: '',
     menuItems: [
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
+      MenuItem(
+        name: 'Classic Buffalo Wings',
+        description:
+            '8 crispy wings tossed in house buffalo sauce. Served with celery and ranch or bleu cheese.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Honey Garlic Wings',
+        description:
+            '8 wings glazed in a sweet honey garlic sauce. Sticky, savory, and impossible to put down.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Loaded Fries',
+        description:
+            'Seasoned fries topped with cheddar cheese sauce, bacon bits, and jalapeños.',
+        price: [6.99],
+      ),
     ],
-    description: '',
-    hours: '',
-    rating: 0,
-    location: '',
+    description:
+        'ATL\'s go-to spot for saucy, crispy wings with a side of good vibes. Whether you\'re watching the game or just hanging out, StrikeOut Wingz has the flavor to match the moment.',
+    hours: 'Monday - Sunday: 11:00 AM - 10:00 PM',
+    rating: 4.2,
+    location: '22 Marietta St NW, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'American',
+    tags: [
+      'hangry',
+      'comfort food',
+      'wings',
+      'game day',
+      'late night',
+      'spicy',
+      'social',
+      'affordable',
+    ],
   ),
   Restaurant(
     name: 'gusto!',
     imagePath: '',
     menuItems: [
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
+      MenuItem(
+        name: 'Grilled Salmon Bowl',
+        description:
+            'Atlantic salmon over quinoa with roasted veggies, avocado, and lemon-herb vinaigrette.',
+        price: [14.99],
+      ),
+      MenuItem(
+        name: 'Veggie Wrap',
+        description:
+            'Grilled zucchini, bell peppers, hummus, spinach, and feta in a whole wheat wrap.',
+        price: [10.49],
+      ),
+      MenuItem(
+        name: 'Acai Bowl',
+        description:
+            'Thick acai base topped with granola, fresh berries, banana, and a drizzle of honey.',
+        price: [9.99],
+      ),
     ],
-    description: '',
-    hours: '',
-    rating: 0,
-    location: '',
-    priceLevel: 1,
+    description:
+        'Fresh, feel-good food made with locally sourced ingredients. gusto! is for when you want something light, energizing, and actually good for you — without sacrificing taste.',
+    hours: 'Monday - Friday: 8:00 AM - 4:00 PM, Saturday: 9:00 AM - 3:00 PM',
+    rating: 4.5,
+    location: '10 Forsyth St NW, Atlanta, GA 30303',
+    priceLevel: 2,
     cuisine: 'American',
+    tags: [
+      'healthy',
+      'light',
+      'fresh',
+      'energized',
+      'brunch',
+      'clean eating',
+      'chill',
+      'bowls',
+    ],
   ),
   Restaurant(
     name: 'Stoner\'s Pizza',
     imagePath: '',
     menuItems: [
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
-      MenuItem(name: '', description: '', price: []),
+      MenuItem(
+        name: 'Classic Cheese Pizza',
+        description:
+            'Hand-tossed dough with house marinara and a generous blanket of mozzarella. Simple and perfect.',
+        price: [8.99, 12.99],
+      ),
+      MenuItem(
+        name: 'Pepperoni Overload',
+        description:
+            'Double pepperoni on house red sauce and mozzarella. No notes.',
+        price: [10.99, 14.99],
+      ),
+      MenuItem(
+        name: 'Garlic Knots',
+        description:
+            'Six buttery, garlicky knots baked fresh and served with marinara dipping sauce.',
+        price: [4.99],
+      ),
     ],
-    description: '',
-    hours: '',
-    rating: 0,
-    location: '',
+    description:
+        'Late-night pizza done right. Thick slices, heavy toppings, and no judgment. Stoner\'s is the move when it\'s late, you\'re hungry, and nothing else will do.',
+    hours: 'Monday - Sunday: 11:00 AM - 2:00 AM',
+    rating: 4.0,
+    location: '55 Auburn Ave NE, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'American',
+    tags: [
+      'late night',
+      'hangry',
+      'comfort food',
+      'pizza',
+      'affordable',
+      'filling',
+      'bored',
+      'chill',
+    ],
   ),
 ];

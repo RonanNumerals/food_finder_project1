@@ -29,7 +29,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
@@ -47,7 +47,9 @@ class DatabaseHelper {
       rating REAL,
       hours TEXT,
       price_level INTEGER,
-      cuisine TEXT
+      cuisine TEXT,
+      tags TEXT,
+      vibe_embedding TEXT
       )
     ''');
 
@@ -128,6 +130,14 @@ class DatabaseHelper {
 
       await _seedDefaultUser(db);
     }
+
+    if (oldVersion < 3) {
+      // Add vibe/mood recommendation columns
+      await db.execute('ALTER TABLE restaurants ADD COLUMN tags TEXT');
+      await db.execute(
+        'ALTER TABLE restaurants ADD COLUMN vibe_embedding TEXT',
+      );
+    }
   }
 
   Future<void> _seedRestaurantData(Database db) async {
@@ -142,6 +152,8 @@ class DatabaseHelper {
         'hours': restaurant.hours,
         'price_level': restaurant.priceLevel,
         'cuisine': restaurant.cuisine,
+        'tags': jsonEncode(restaurant.tags),
+        // vibe_embedding intentionally omitted -- computed later by EmbeddingService
       });
 
       final menuItem = restaurant.menuItems;

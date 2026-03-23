@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import '../data/restaurant_data.dart';
+import '../services/vibe_service.dart';
+import '../models/restaurant.dart';
 import '../widgets/restaurant_card.dart';
 
 class VibeScreen extends StatefulWidget {
@@ -19,6 +20,11 @@ class _VibeScreenState extends State<VibeScreen> {
   ];
 
   late final String _placeholder;
+  final TextEditingController _controller = TextEditingController();
+
+  List<Restaurant> _results = [];
+  bool _isLoading = false;
+  bool _hasSearched = false; // true once the user has submitted at least once
 
   @override
   void initState() {
@@ -27,12 +33,43 @@ class _VibeScreenState extends State<VibeScreen> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _onSubmitted(String mood) async {
+    final trimmed = mood.trim();
+    if (trimmed.isEmpty) return;
+
+    setState(() {
+      _isLoading = true;
+      _hasSearched = true;
+    });
+
+    try {
+      final matches = await VibeService.instance.getVibeMatches(trimmed);
+      if (!mounted) return;
+      setState(() {
+        _results = matches;
+        _isLoading = false;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() => _isLoading = false);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Vibe search failed: $e')));
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            // Top half
+            // ── Top half: prompt + text field ──
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -49,6 +86,9 @@ class _VibeScreenState extends State<VibeScreen> {
                     ),
                     const SizedBox(height: 16),
                     TextField(
+                      controller: _controller,
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: _onSubmitted,
                       decoration: InputDecoration(
                         hintText: _placeholder,
                         filled: true,
@@ -67,7 +107,8 @@ class _VibeScreenState extends State<VibeScreen> {
                 ),
               ),
             ),
-            // Bottom half
+
+            // ── Bottom half: results ──
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -82,19 +123,7 @@ class _VibeScreenState extends State<VibeScreen> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    // Scrollable restaurant list — replace sampleRestaurants with a DB call later
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: sampleRestaurants.length,
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(height: 12),
-                        itemBuilder: (context, index) {
-                          return RestaurantCard(
-                            restaurant: sampleRestaurants[index],
-                          );
-                        },
-                      ),
-                    ),
+                    Expanded(child: _buildBody()),
                   ],
                 ),
               ),
@@ -102,6 +131,40 @@ class _VibeScreenState extends State<VibeScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildBody() {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (!_hasSearched) {
+      return const Center(
+        child: Text(
+          'Type a mood and press enter to discover restaurants.',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.grey),
+        ),
+      );
+    }
+
+    if (_results.isEmpty) {
+      return const Center(
+        child: Text(
+          'No matches found. Try a different vibe!',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.grey),
+        ),
+      );
+    }
+
+    return ListView.separated(
+      itemCount: _results.length,
+      separatorBuilder: (_, _) => const SizedBox(height: 12),
+      itemBuilder: (context, index) {
+        return RestaurantCard(restaurant: _results[index]);
+      },
     );
   }
 }

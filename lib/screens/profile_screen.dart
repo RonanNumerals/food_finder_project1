@@ -29,6 +29,56 @@ class ProfileScreenState extends State<ProfileScreen> {
   /// Called by MainScreen via GlobalKey whenever the Profile tab is selected.
   Future<void> refresh() => _loadData();
 
+  Future<void> _editName() async {
+    final controller = TextEditingController(text: _user?.name ?? '');
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Edit Name'),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          textCapitalization: TextCapitalization.words,
+          decoration: InputDecoration(
+            hintText: 'Your name',
+            filled: true,
+            fillColor: const Color(0xFFECECEC),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: const Text(
+              'Save',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true || _user == null) return;
+
+    final newName = controller.text.trim();
+    if (newName.isEmpty || newName == _user!.name) return;
+
+    final updated = _user!.copyWith(name: newName);
+    await _db.updateUser(updated);
+    if (mounted) setState(() => _user = updated);
+  }
+
   Future<void> _loadData() async {
     setState(() => _isLoading = true);
 
@@ -97,13 +147,28 @@ class ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Name
-                          Text(
-                            userName,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          // Name + edit button
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                userName,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              GestureDetector(
+                                onTap: _editName,
+                                child: const Icon(
+                                  Icons.edit,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 4),
                           // Location

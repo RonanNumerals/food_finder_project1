@@ -6,7 +6,7 @@ import '../models/menu.dart';
 final List<Restaurant> sampleRestaurants = [
   Restaurant(
     name: 'Baraka Shawarma',
-    imagePath: 'assets/images/baraka_shawarma.jpg',
+    imagePath: 'assets/images/baraka_shawarma.webp',
     menuItems: [
       MenuItem(name: 'Gyro Shawarma', description: '', price: [8.49, 10.49]),
       MenuItem(name: 'Falafel', description: '', price: [7.99, 9.99]),

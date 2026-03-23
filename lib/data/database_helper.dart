@@ -306,8 +306,70 @@ class DatabaseHelper {
   // RESTAURANTS & MENU ITEMS (unchanged read helpers)
   // -------------------------------------------------------------------------
 
+  // READ - get all restaurants by name
+  Future<List<Map<String, dynamic>>> getRestaurantsByName(String name) async {
+    final db = await database;
+    final results = await db.query(
+      'restaurants',
+      where: 'name LIKE ?',
+      whereArgs: ['%$name%'],
+    );
+    return results;
+  }
+
+  // READ - get all restaurants by price level
+  Future<List<Map<String, dynamic>>> getRestaurantsByPriceLevel(int priceLevel) async {
+    final db = await database;
+    final results = await db.query(
+      'restaurants',
+      where: 'price_level = ?',
+      whereArgs: [priceLevel],
+    );
+    return results;
+  }
+
+  // READ - get all restaurants by cuisine
+  Future<List<Map<String, dynamic>>> getRestaurantsByCuisine(String cuisine) async {
+    final db = await database;
+    final results = await db.query(
+      'restaurants',
+      where: 'cuisine LIKE ?',
+      whereArgs: ['%$cuisine%'],
+    );
+    return results;
+  }
+
+  // READ - get all restaurants by hours
+  Future<List<Map<String, dynamic>>> getRestaurantsOpenAt(String time) async {
+    final db = await database;
+    final results = await db.query(
+      'restaurants',
+      where: 'hours LIKE ?',
+      whereArgs: ['%$time%'],
+    );
+    return results;
+  }
+
+  // READ - Get all restaurants (for Home page)
+  Future<List<Map<String, dynamic>>> getAllRestaurants() async {
+    final db = await database;
+    final results = await db.query('restaurants');
+    return results;
+  }
+
+  // READ - Get single restaurant by ID
+    Future<Map<String, dynamic>?> getRestaurant(int id) async {
+      final db = await database;
+      final results = await db.query(
+        'restaurants',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      return results.isNotEmpty ? results.first : null;
+    }
+  
   // READ - Get single menu item by ID
-  Future<Map<String, dynamic>?> getMenuItem(int id) async {
+  Future<Map<String, dynamic>?> getMenuItemById(int id) async {
     final db = await database;
     final results = await db.query(
       'menu_items',
@@ -317,15 +379,15 @@ class DatabaseHelper {
     return results.isNotEmpty ? results.first : null;
   }
 
-  // READ - Get single restaurant by ID
-  Future<Map<String, dynamic>?> getRestaurant(int id) async {
+  // READ - Get all menu items for a given restaurant
+  Future<List<Map<String, dynamic>>> getMenuItemsByRestaurantId(int restaurantId) async {
     final db = await database;
     final results = await db.query(
-      'restaurants',
-      where: 'id = ?',
-      whereArgs: [id],
+      'menu_items',
+      where: 'restaurant_id = ?',
+      whereArgs: [restaurantId],
     );
-    return results.isNotEmpty ? results.first : null;
+    return results;
   }
 
   // Close database connection

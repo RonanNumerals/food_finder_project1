@@ -334,7 +334,7 @@ final List<Restaurant> sampleRestaurants = [
   ),
   Restaurant(
     name: 'Sensational Subs',
-    imagePath: '',
+    imagePath: 'assets/images/sensational_subs.jpg',
     menuItems: [
       MenuItem(
         name: 'Classic Italian Sub',
@@ -357,9 +357,9 @@ final List<Restaurant> sampleRestaurants = [
     ],
     description:
         'A no-frills sub shop serving overstuffed sandwiches with fresh-baked bread and quality ingredients. Quick, filling, and easy on the wallet — perfect for a grab-and-go lunch.',
-    hours: 'Monday - Friday: 10:30 AM - 5:00 PM',
-    rating: 4.1,
-    location: '30 Peachtree St NW, Atlanta, GA 30303',
+    hours: 'Monday, Wednesday, Thursday: 9:00 AM - 5:00 PM, Tuesday: 9:00 AM - 7:00 PM, Friday: 10:00 AM - 4:00 PM',
+    rating: 4.5,
+    location: '33 Edgewood Ave SE, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'American',
     tags: [
@@ -374,7 +374,7 @@ final List<Restaurant> sampleRestaurants = [
   ),
   Restaurant(
     name: 'Mr. Hibachi',
-    imagePath: '',
+    imagePath: 'assets/images/mr_hibachi.jpg',
     menuItems: [
       MenuItem(
         name: 'Hibachi Chicken',
@@ -397,9 +397,9 @@ final List<Restaurant> sampleRestaurants = [
     ],
     description:
         'Bringing the hibachi grill experience to downtown Atlanta. Bold flavors, high heat, and generous portions — from sizzling steak to crispy tempura.',
-    hours: 'Monday - Saturday: 11:00 AM - 9:00 PM',
-    rating: 4.3,
-    location: '45 Broad St NW, Atlanta, GA 30303',
+    hours: 'Monday - Friday: 10:30 AM - 6:00 PM',
+    rating: 3.8,
+    location: '31 Edgewood Ave NE, Atlanta, GA 30303',
     priceLevel: 2,
     cuisine: 'Japanese',
     tags: [
@@ -415,7 +415,7 @@ final List<Restaurant> sampleRestaurants = [
   ),
   Restaurant(
     name: 'StrikeOut Wingz ATL',
-    imagePath: '',
+    imagePath: 'assets/images/strikeout_wingz_atl.jpg',
     menuItems: [
       MenuItem(
         name: 'Classic Buffalo Wings',
@@ -438,9 +438,9 @@ final List<Restaurant> sampleRestaurants = [
     ],
     description:
         'ATL\'s go-to spot for saucy, crispy wings with a side of good vibes. Whether you\'re watching the game or just hanging out, StrikeOut Wingz has the flavor to match the moment.',
-    hours: 'Monday - Sunday: 11:00 AM - 10:00 PM',
-    rating: 4.2,
-    location: '22 Marietta St NW, Atlanta, GA 30303',
+    hours: 'Monday - Thursday: 11:00 AM - 10:00 PM, Friday - Saturday: 11:00 AM - 12:00 AM, Sunday: 12:00 PM - 9:00 PM',
+    rating: 4.5,
+    location: '60 Peachtree St NW, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'American',
     tags: [
@@ -456,7 +456,7 @@ final List<Restaurant> sampleRestaurants = [
   ),
   Restaurant(
     name: 'gusto!',
-    imagePath: '',
+    imagePath: 'assets/images/gusto.jpg',
     menuItems: [
       MenuItem(
         name: 'Grilled Salmon Bowl',
@@ -479,9 +479,9 @@ final List<Restaurant> sampleRestaurants = [
     ],
     description:
         'Fresh, feel-good food made with locally sourced ingredients. gusto! is for when you want something light, energizing, and actually good for you — without sacrificing taste.',
-    hours: 'Monday - Friday: 8:00 AM - 4:00 PM, Saturday: 9:00 AM - 3:00 PM',
-    rating: 4.5,
-    location: '10 Forsyth St NW, Atlanta, GA 30303',
+    hours: 'Monday - Friday: 10:30 AM - 8:00 PM',
+    rating: 4.3,
+    location: '2 Park Pl SE SE, Atlanta, GA 30303',
     priceLevel: 2,
     cuisine: 'American',
     tags: [
@@ -497,7 +497,7 @@ final List<Restaurant> sampleRestaurants = [
   ),
   Restaurant(
     name: 'Stoner\'s Pizza',
-    imagePath: '',
+    imagePath: 'assets/images/stoners_pizza.jpg',
     menuItems: [
       MenuItem(
         name: 'Classic Cheese Pizza',
@@ -520,9 +520,9 @@ final List<Restaurant> sampleRestaurants = [
     ],
     description:
         'Late-night pizza done right. Thick slices, heavy toppings, and no judgment. Stoner\'s is the move when it\'s late, you\'re hungry, and nothing else will do.',
-    hours: 'Monday - Sunday: 11:00 AM - 2:00 AM',
-    rating: 4.0,
-    location: '55 Auburn Ave NE, Atlanta, GA 30303',
+    hours: 'Monday - Thursday: 11:00 AM - 1:00 AM, Friday - Sunday: 11:00 AM - 2:00 AM',
+    rating: 3.9,
+    location: '120 Piedmont Ave NE, Atlanta, GA 30303',
     priceLevel: 1,
     cuisine: 'American',
     tags: [

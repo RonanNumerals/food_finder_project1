@@ -1,19 +1,73 @@
 import 'package:flutter/material.dart';
-import '../models/restaurant.dart';
+import '../data/database_helper.dart';
 import '../models/menu.dart';
+import '../models/restaurant.dart';
+import '../models/review.dart';
 
-class RestaurantDetailsScreen extends StatelessWidget {
+class RestaurantDetailsScreen extends StatefulWidget {
   final Restaurant restaurant;
 
   const RestaurantDetailsScreen({super.key, required this.restaurant});
 
   @override
+  State<RestaurantDetailsScreen> createState() =>
+      _RestaurantDetailsScreenState();
+}
+
+class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
+  final _db = DatabaseHelper.instance;
+
+  bool _isFavorite = false;
+  bool _favoriteLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFavoriteStatus();
+  }
+
+  Future<void> _checkFavoriteStatus() async {
+    final id = widget.restaurant.id;
+    if (id == null) {
+      setState(() => _favoriteLoading = false);
+      return;
+    }
+    final result = await _db.isFavorite(id);
+    if (mounted) {
+      setState(() {
+        _isFavorite = result;
+        _favoriteLoading = false;
+      });
+    }
+  }
+
+  Future<void> _toggleFavorite() async {
+    final id = widget.restaurant.id;
+    if (id == null || _favoriteLoading) return;
+
+    // Optimistic update
+    final wasAdding = !_isFavorite;
+    setState(() => _isFavorite = wasAdding);
+
+    try {
+      if (wasAdding) {
+        await _db.addFavorite(id);
+      } else {
+        await _db.removeFavorite(id);
+      }
+    } catch (_) {
+      // Roll back on failure
+      if (mounted) setState(() => _isFavorite = !wasAdding);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final infoHeight = screenHeight * 0.4;
-    final imagePath = restaurant.imagePath.isEmpty
+    final imagePath = widget.restaurant.imagePath.isEmpty
         ? 'assets/images/chick_fil_a.jpg'
-        : restaurant.imagePath;
+        : widget.restaurant.imagePath;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -27,7 +81,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
                 fit: StackFit.loose,
                 clipBehavior: Clip.hardEdge,
                 children: [
-                  // Background image — fills whatever height the Stack settles at
+                  // Background image
                   Positioned.fill(
                     child: Image.asset(imagePath, fit: BoxFit.cover),
                   ),
@@ -64,7 +118,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
                             children: [
                               // Restaurant name
                               Text(
-                                restaurant.name,
+                                widget.restaurant.name,
                                 style: const TextStyle(
                                   fontSize: 36,
                                   fontWeight: FontWeight.bold,
@@ -74,7 +128,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
                               const SizedBox(height: 4),
                               // Hours
                               Text(
-                                restaurant.hours,
+                                widget.restaurant.hours,
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -83,11 +137,11 @@ class RestaurantDetailsScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 6),
                               // Star rating
-                              _buildStarRating(restaurant.rating),
+                              _buildStarRating(widget.restaurant.rating),
                               const SizedBox(height: 4),
                               // Address
                               Text(
-                                restaurant.location,
+                                widget.restaurant.location,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -100,9 +154,12 @@ class RestaurantDetailsScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              _buildPillButton('favorite'),
+                              _buildFavoriteButton(),
                               const SizedBox(width: 12),
-                              _buildPillButton('write a review'),
+                              GestureDetector(
+                                onTap: _showReviewModal,
+                                child: _buildPillButton('write a review'),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 4),
@@ -119,31 +176,217 @@ class RestaurantDetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // "menu" heading — centered, matches Suggestions section style
                   const Text(
                     'menu',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
-                  // Menu items list — shrinkWrapped inside scroll view
                   ListView.separated(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    // Filter out placeholder empty items
-                    itemCount: restaurant.menuItems
+                    itemCount: widget.restaurant.menuItems
                         .where((item) => item.name.isNotEmpty)
                         .length,
                     separatorBuilder: (context, index) =>
                         const Divider(height: 24),
                     itemBuilder: (context, index) {
-                      final items = restaurant.menuItems
+                      final items = widget.restaurant.menuItems
                           .where((item) => item.name.isNotEmpty)
                           .toList();
                       return _MenuItemTile(item: items[index]);
                     },
                   ),
                 ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showReviewModal() {
+    final restaurantId = widget.restaurant.id;
+    if (restaurantId == null) return;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (sheetContext) {
+        int selectedStars = 0;
+        final reviewController = TextEditingController();
+        bool submitting = false;
+
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            final canSubmit =
+                selectedStars > 0 && reviewController.text.trim().isNotEmpty;
+
+            Future<void> submit() async {
+              if (!canSubmit || submitting) return;
+              setModalState(() => submitting = true);
+
+              try {
+                final user = await DatabaseHelper.instance.getUser();
+                final review = Review(
+                  restaurantId: restaurantId,
+                  writtenReview: reviewController.text.trim(),
+                  rating: selectedStars.toDouble(),
+                  name: user?.name ?? 'Anonymous',
+                  createdAt: DateTime.now().toIso8601String(),
+                );
+                await DatabaseHelper.instance.createReview(review);
+
+                if (context.mounted) Navigator.pop(context);
+                if (mounted) {
+                  ScaffoldMessenger.of(this.context).showSnackBar(
+                    const SnackBar(content: Text('Review submitted!')),
+                  );
+                }
+              } catch (_) {
+                setModalState(() => submitting = false);
+              }
+            }
+
+            return Padding(
+              padding: EdgeInsets.only(
+                left: 24,
+                right: 24,
+                top: 16,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Drag handle
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      margin: const EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                  // Heading
+                  const Text(
+                    'Write a Review',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 20),
+                  // Star rating row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(5, (i) {
+                      final filled = i < selectedStars;
+                      return GestureDetector(
+                        onTap: () => setModalState(() => selectedStars = i + 1),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: Icon(
+                            filled ? Icons.star : Icons.star_border,
+                            color: filled ? Colors.amber : Colors.grey[400],
+                            size: 36,
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                  const SizedBox(height: 20),
+                  // Review body
+                  TextField(
+                    controller: reviewController,
+                    maxLines: 4,
+                    onChanged: (_) => setModalState(() {}),
+                    decoration: InputDecoration(
+                      hintText: 'What did you think?',
+                      filled: true,
+                      fillColor: const Color(0xFFECECEC),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: const EdgeInsets.all(16),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Submit button
+                  SizedBox(
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: canSubmit && !submitting ? submit : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        disabledBackgroundColor: Colors.grey[300],
+                        disabledForegroundColor: Colors.grey[500],
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: submitting
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text(
+                              'Submit',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildFavoriteButton() {
+    final active = !_favoriteLoading && _isFavorite;
+
+    return GestureDetector(
+      onTap: _favoriteLoading ? null : _toggleFavorite,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        decoration: BoxDecoration(
+          color: active ? const Color(0xFFE53935) : Colors.white,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              active ? Icons.favorite : Icons.favorite_border,
+              size: 16,
+              color: active ? Colors.white : Colors.black,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              active ? 'favorited' : 'favorite',
+              style: TextStyle(
+                color: active ? Colors.white : Colors.black,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],

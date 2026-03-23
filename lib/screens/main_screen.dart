@@ -14,22 +14,26 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _screens = <Widget>[
-    DiscoverScreen(),
-    VibeScreen(),
-    ProfileScreen(),
-  ];
+  final _profileKey = GlobalKey<ProfileScreenState>();
 
   void _onDestinationSelected(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() => _selectedIndex = index);
+    if (index == 2) {
+      _profileKey.currentState?.refresh();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _selectedIndex, children: _screens),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          const DiscoverScreen(),
+          const VibeScreen(),
+          ProfileScreen(key: _profileKey),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: _onDestinationSelected,

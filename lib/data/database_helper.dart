@@ -321,6 +321,18 @@ class DatabaseHelper {
     return rows.map(Review.fromMap).toList();
   }
 
+  /// Returns all reviews joined with the restaurant name, newest first.
+  Future<List<Review>> getReviewsWithRestaurantName() async {
+    final db = await database;
+    final rows = await db.rawQuery('''
+      SELECT rev.*, r.name AS restaurant_name
+      FROM reviews rev
+      INNER JOIN restaurants r ON r.id = rev.restaurant_id
+      ORDER BY rev.created_at DESC
+    ''');
+    return rows.map(Review.fromMap).toList();
+  }
+
   /// Returns reviews for a single restaurant, newest first.
   Future<List<Review>> getReviewsByRestaurant(int restaurantId) async {
     final db = await database;

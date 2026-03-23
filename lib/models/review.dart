@@ -6,6 +6,9 @@ class Review {
   final String name;
   final String createdAt;
 
+  /// Populated by join queries only — not stored in the DB.
+  final String? restaurantName;
+
   Review({
     this.id,
     required this.restaurantId,
@@ -13,6 +16,7 @@ class Review {
     required this.rating,
     required this.name,
     required this.createdAt,
+    this.restaurantName,
   });
 
   Map<String, dynamic> toMap() {
@@ -34,6 +38,7 @@ class Review {
       rating: (map['rating'] as num).toDouble(),
       name: map['name'] as String,
       createdAt: map['created_at'] as String,
+      restaurantName: map['restaurant_name'] as String?,
     );
   }
 }

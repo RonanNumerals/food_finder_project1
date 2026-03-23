@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/database_helper.dart';
 import '../models/review.dart';
+import '../utils/app_theme.dart';
 
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({super.key});
@@ -33,6 +34,10 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final ext = theme.extension<AppThemeExtension>()!;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -47,18 +52,23 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                   // Back button
                   GestureDetector(
                     onTap: () => Navigator.pop(context),
-                    child: const Icon(Icons.arrow_back, size: 28),
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 28,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   // Title
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: const Text(
+                    child: Text(
                       'My Reviews',
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -71,10 +81,10 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : _reviews.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         'No reviews yet.',
-                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                        style: TextStyle(fontSize: 16, color: ext.subtitleText),
                       ),
                     )
                   : ListView.separated(
@@ -103,10 +113,14 @@ class _ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final ext = theme.extension<AppThemeExtension>()!;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFECECEC),
+        color: ext.cardFill,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -115,23 +129,30 @@ class _ReviewCard extends StatelessWidget {
           // Restaurant name
           Text(
             review.restaurantName ?? 'Unknown Restaurant',
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: colorScheme.onSurface,
+            ),
           ),
           const SizedBox(height: 6),
           // Star rating row
-          _buildStarRating(review.rating),
+          _buildStarRating(review.rating, ext),
           const SizedBox(height: 8),
           // Review body
           Text(
             review.writtenReview,
-            style: const TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+              color: colorScheme.onSurface.withValues(alpha: 0.87),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildStarRating(double rating) {
+  Widget _buildStarRating(double rating, AppThemeExtension ext) {
     final int fullStars = rating.floor();
     final bool hasHalfStar = (rating - fullStars) >= 0.5;
     final int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -147,12 +168,12 @@ class _ReviewCard extends StatelessWidget {
           const Icon(Icons.star_half, color: Colors.amber, size: 16),
         ...List.generate(
           emptyStars,
-          (_) => const Icon(Icons.star_border, color: Colors.black38, size: 16),
+          (_) => Icon(Icons.star_border, color: ext.starEmpty, size: 16),
         ),
         const SizedBox(width: 4),
         Text(
           rating.toStringAsFixed(1),
-          style: const TextStyle(fontSize: 12, color: Colors.black54),
+          style: TextStyle(fontSize: 12, color: ext.subtitleText),
         ),
       ],
     );

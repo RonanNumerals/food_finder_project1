@@ -3,11 +3,19 @@ import 'package:flutter/material.dart';
 import '../data/database_helper.dart';
 import '../models/restaurant.dart';
 import '../models/user.dart';
+import '../utils/app_theme.dart';
 import '../widgets/restaurant_card.dart';
 import 'review_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final bool isDarkMode;
+  final ValueChanged<bool> onThemeToggle;
+
+  const ProfileScreen({
+    super.key,
+    required this.isDarkMode,
+    required this.onThemeToggle,
+  });
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
@@ -42,15 +50,9 @@ class ProfileScreenState extends State<ProfileScreen> {
           textCapitalization: TextCapitalization.words,
           decoration: InputDecoration(
             hintText: 'Your name',
-            filled: true,
-            fillColor: const Color(0xFFECECEC),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
-            ),
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 12,
             ),
           ),
         ),
@@ -101,6 +103,10 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final ext = theme.extension<AppThemeExtension>()!;
+
     final profileImage = _user?.profileImage ?? 'assets/images/default_pfp.jpg';
     final userName = _user?.name ?? 'Your Name';
     final location = _user?.location ?? '';
@@ -116,18 +122,41 @@ class ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: const Text(
-                      'Profile',
-                      style: TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
+                  // Title row with dark mode toggle
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: Text(
+                          'Profile',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: colorScheme.onSurface,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
                       ),
-                      textAlign: TextAlign.left,
-                    ),
+                      // Dark mode toggle
+                      Row(
+                        children: [
+                          Icon(
+                            widget.isDarkMode
+                                ? Icons.dark_mode
+                                : Icons.light_mode,
+                            color: colorScheme.onSurfaceVariant,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 4),
+                          Switch(
+                            value: widget.isDarkMode,
+                            onChanged: widget.onThemeToggle,
+                            activeTrackColor: colorScheme.primary,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                   // Profile info row
                   Row(
@@ -155,18 +184,19 @@ class ProfileScreenState extends State<ProfileScreen> {
                             children: [
                               Text(
                                 userName,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
                               const SizedBox(width: 4),
                               GestureDetector(
                                 onTap: _editName,
-                                child: const Icon(
+                                child: Icon(
                                   Icons.edit,
                                   size: 18,
-                                  color: Colors.grey,
+                                  color: colorScheme.onSurfaceVariant,
                                 ),
                               ),
                             ],
@@ -175,10 +205,11 @@ class ProfileScreenState extends State<ProfileScreen> {
                           // Location
                           if (location.isNotEmpty)
                             Text(
-                              '📍 $location',
-                              style: const TextStyle(
+                              location,
+                              style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.normal,
+                                color: colorScheme.onSurface,
                               ),
                             ),
                           const SizedBox(height: 4),
@@ -190,16 +221,18 @@ class ProfileScreenState extends State<ProfileScreen> {
                                   children: [
                                     TextSpan(
                                       text: '${_favorites.length}',
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
+                                        color: colorScheme.onSurface,
                                       ),
                                     ),
-                                    const TextSpan(
+                                    TextSpan(
                                       text: ' Favorites',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal,
+                                        color: colorScheme.onSurface,
                                       ),
                                     ),
                                   ],
@@ -218,16 +251,18 @@ class ProfileScreenState extends State<ProfileScreen> {
                                     children: [
                                       TextSpan(
                                         text: '$_reviewsCount',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
+                                          color: colorScheme.onSurface,
                                         ),
                                       ),
-                                      const TextSpan(
+                                      TextSpan(
                                         text: ' Reviews',
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
+                                          color: colorScheme.onSurface,
                                         ),
                                       ),
                                     ],
@@ -242,9 +277,13 @@ class ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 20),
                   // Section title
-                  const Text(
+                  Text(
                     'Favorites',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                 ],
               ),
@@ -255,10 +294,10 @@ class ProfileScreenState extends State<ProfileScreen> {
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : _favorites.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         'No favorites yet.',
-                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                        style: TextStyle(fontSize: 16, color: ext.subtitleText),
                       ),
                     )
                   : Padding(

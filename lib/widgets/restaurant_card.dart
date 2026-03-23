@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/restaurant.dart';
 import '../screens/restaurant_details_screen.dart';
+import '../utils/app_theme.dart';
 
 class RestaurantCard extends StatelessWidget {
   final Restaurant restaurant;
@@ -9,6 +10,10 @@ class RestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final ext = theme.extension<AppThemeExtension>()!;
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -46,27 +51,28 @@ class RestaurantCard extends StatelessWidget {
                   // Restaurant name
                   Text(
                     restaurant.name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 4),
                   // Hours
                   Text(
                     restaurant.hours,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style: TextStyle(fontSize: 12, color: ext.subtitleText),
                   ),
                   const SizedBox(height: 4),
                   // Star rating
-                  _buildStarRating(restaurant.rating),
+                  _buildStarRating(restaurant.rating, ext),
                   const SizedBox(height: 4),
                   // Price level
                   Text(
                     restaurant.priceLabelString,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: Colors.green,
+                      color: ext.priceText,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -79,7 +85,7 @@ class RestaurantCard extends StatelessWidget {
     );
   }
 
-  Widget _buildStarRating(double rating) {
+  Widget _buildStarRating(double rating, AppThemeExtension ext) {
     int fullStars = rating.floor();
     bool hasHalfStar = (rating - fullStars) >= 0.5;
     int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -95,12 +101,12 @@ class RestaurantCard extends StatelessWidget {
           const Icon(Icons.star_half, color: Colors.amber, size: 18),
         ...List.generate(
           emptyStars,
-          (_) => const Icon(Icons.star, color: Colors.grey, size: 18),
+          (_) => Icon(Icons.star, color: ext.starEmpty, size: 18),
         ),
         const SizedBox(width: 4),
         Text(
           rating.toString(),
-          style: const TextStyle(fontSize: 12, color: Colors.grey),
+          style: TextStyle(fontSize: 12, color: ext.subtitleText),
         ),
       ],
     );

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../services/vibe_service.dart';
 import '../models/restaurant.dart';
+import '../utils/app_theme.dart';
 import '../widgets/restaurant_card.dart';
 
 class VibeScreen extends StatefulWidget {
@@ -65,11 +66,15 @@ class _VibeScreenState extends State<VibeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final ext = theme.extension<AppThemeExtension>()!;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            // ── Top half: prompt + text field ──
+            // -- Top half: prompt + text field --
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -77,53 +82,44 @@ class _VibeScreenState extends State<VibeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "I'm feeling...",
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 16),
+                    // Uses InputDecorationTheme from AppTheme
                     TextField(
                       controller: _controller,
                       textInputAction: TextInputAction.search,
                       onSubmitted: _onSubmitted,
-                      decoration: InputDecoration(
-                        hintText: _placeholder,
-                        filled: true,
-                        fillColor: const Color(0xFFECECEC),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 12,
-                        ),
-                      ),
+                      decoration: InputDecoration(hintText: _placeholder),
                     ),
                   ],
                 ),
               ),
             ),
 
-            // ── Bottom half: results ──
+            // -- Bottom half: results --
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Suggestions',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Expanded(child: _buildBody()),
+                    Expanded(child: _buildBody(ext)),
                   ],
                 ),
               ),
@@ -134,27 +130,27 @@ class _VibeScreenState extends State<VibeScreen> {
     );
   }
 
-  Widget _buildBody() {
+  Widget _buildBody(AppThemeExtension ext) {
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
     if (!_hasSearched) {
-      return const Center(
+      return Center(
         child: Text(
           'Type a mood and press enter to discover restaurants.',
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: ext.subtitleText),
         ),
       );
     }
 
     if (_results.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
           'No matches found. Try a different vibe!',
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey),
+          style: TextStyle(color: ext.subtitleText),
         ),
       );
     }

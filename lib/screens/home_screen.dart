@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../data/database_helper.dart';
 import '../models/restaurant.dart';
+import '../utils/app_theme.dart';
 import '../widgets/restaurant_card.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   String? _selectedPrice;
   bool _openNow = false;
 
-  // Map price label → DB price_level integer
+  // Map price label -> DB price_level integer
   static const _priceToLevel = {'\$': 1, '\$\$': 2, '\$\$\$': 3};
 
   @override
@@ -75,6 +76,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final ext = theme.extension<AppThemeExtension>()!;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -90,32 +95,21 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: const Text(
+                    child: Text(
                       'Munchies',
                       style: TextStyle(
                         fontSize: 36,
                         fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
                       ),
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  // Search bar
+                  // Search bar (uses InputDecorationTheme from AppTheme)
                   TextField(
                     controller: _searchController,
                     onChanged: _onSearchChanged,
-                    decoration: InputDecoration(
-                      hintText: 'discover...',
-                      filled: true,
-                      fillColor: const Color(0xFFECECEC),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
-                      ),
-                    ),
+                    decoration: const InputDecoration(hintText: 'discover...'),
                   ),
                   // Filter buttons row
                   Row(
@@ -135,6 +129,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           });
                           _fetchRestaurants();
                         },
+                        ext: ext,
                       ),
                       // Price dropdown
                       _buildDropdownButton(
@@ -149,6 +144,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           });
                           _fetchRestaurants();
                         },
+                        ext: ext,
                       ),
                       // Open Now toggle
                       GestureDetector(
@@ -162,15 +158,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: _openNow
-                                ? Colors.green
-                                : const Color(0xFFECECEC),
+                            color: _openNow ? ext.activeChipFill : ext.chipFill,
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Text(
                             'open now',
                             style: TextStyle(
-                              color: _openNow ? Colors.white : Colors.black,
+                              color: _openNow
+                                  ? ext.activeChipText
+                                  : ext.chipText,
                               fontSize: 14,
                             ),
                           ),
@@ -186,10 +182,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : _restaurants.isEmpty
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         'No restaurants found.',
-                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                        style: TextStyle(fontSize: 16, color: ext.subtitleText),
                       ),
                     )
                   : ListView.separated(
@@ -215,6 +211,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     required String label,
     required List<String> items,
     required ValueChanged<String> onSelected,
+    required AppThemeExtension ext,
     bool isActive = false,
   }) {
     return PopupMenuButton<String>(
@@ -226,7 +223,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isActive ? Colors.green : const Color(0xFFECECEC),
+          color: isActive ? ext.activeChipFill : ext.chipFill,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -236,14 +233,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               label,
               style: TextStyle(
                 fontSize: 14,
-                color: isActive ? Colors.white : Colors.black,
+                color: isActive ? ext.activeChipText : ext.chipText,
               ),
             ),
             const SizedBox(width: 4),
             Icon(
               Icons.arrow_drop_down,
               size: 18,
-              color: isActive ? Colors.white : Colors.black,
+              color: isActive ? ext.activeChipText : ext.chipText,
             ),
           ],
         ),

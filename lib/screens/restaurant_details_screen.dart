@@ -3,6 +3,7 @@ import '../data/database_helper.dart';
 import '../models/menu.dart';
 import '../models/restaurant.dart';
 import '../models/review.dart';
+import '../utils/app_theme.dart';
 
 class RestaurantDetailsScreen extends StatefulWidget {
   final Restaurant restaurant;
@@ -63,6 +64,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final screenHeight = MediaQuery.of(context).size.height;
     final infoHeight = screenHeight * 0.4;
     final imagePath = widget.restaurant.imagePath.isEmpty
@@ -74,7 +77,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ── INFO SECTION ───────────────────────────────────────────────
+            // -- INFO SECTION --
             ConstrainedBox(
               constraints: BoxConstraints(minHeight: infoHeight),
               child: Stack(
@@ -136,8 +139,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                                 ),
                               ),
                               const SizedBox(height: 6),
-                              // Star rating
-                              _buildStarRating(widget.restaurant.rating),
+                              // Star rating (on image overlay - always white)
+                              _buildOverlayStarRating(widget.restaurant.rating),
                               const SizedBox(height: 4),
                               // Address
                               Text(
@@ -170,16 +173,20 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                 ],
               ),
             ),
-            // ── MENU SECTION ───────────────────────────────────────────────
+            // -- MENU SECTION --
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
+                  Text(
                     'menu',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   ListView.separated(
@@ -213,7 +220,6 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -224,6 +230,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
 
         return StatefulBuilder(
           builder: (context, setModalState) {
+            final theme = Theme.of(context);
+            final colorScheme = theme.colorScheme;
+            final ext = theme.extension<AppThemeExtension>()!;
             final canSubmit =
                 selectedStars > 0 && reviewController.text.trim().isNotEmpty;
 
@@ -271,16 +280,20 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       height: 4,
                       margin: const EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color: colorScheme.onSurfaceVariant,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
                   ),
                   // Heading
-                  const Text(
+                  Text(
                     'Write a Review',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   // Star rating row
@@ -294,7 +307,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: Icon(
                             filled ? Icons.star : Icons.star_border,
-                            color: filled ? Colors.amber : Colors.grey[400],
+                            color: filled ? Colors.amber : ext.starEmpty,
                             size: 36,
                           ),
                         ),
@@ -302,20 +315,17 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                     }),
                   ),
                   const SizedBox(height: 20),
-                  // Review body
+                  // Review body (uses InputDecorationTheme)
                   TextField(
                     controller: reviewController,
                     maxLines: 4,
                     onChanged: (_) => setModalState(() {}),
                     decoration: InputDecoration(
                       hintText: 'What did you think?',
-                      filled: true,
-                      fillColor: const Color(0xFFECECEC),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: const EdgeInsets.all(16),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -324,23 +334,11 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                     height: 50,
                     child: ElevatedButton(
                       onPressed: canSubmit && !submitting ? submit : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
-                        disabledBackgroundColor: Colors.grey[300],
-                        disabledForegroundColor: Colors.grey[500],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
                       child: submitting
                           ? const SizedBox(
                               width: 20,
                               height: 20,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
+                              child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Text(
                               'Submit',
@@ -395,7 +393,8 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
     );
   }
 
-  Widget _buildStarRating(double rating) {
+  /// Star rating displayed on the dark image overlay -- always uses white text.
+  Widget _buildOverlayStarRating(double rating) {
     final int fullStars = rating.floor();
     final bool hasHalfStar = (rating - fullStars) >= 0.5;
     final int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -441,7 +440,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
   }
 }
 
-// ── MenuItem tile widget ────────────────────────────────────────────────────
+// -- MenuItem tile widget --
 class _MenuItemTile extends StatelessWidget {
   final MenuItem item;
 
@@ -459,6 +458,8 @@ class _MenuItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -469,16 +470,20 @@ class _MenuItemTile extends StatelessWidget {
             children: [
               Text(
                 item.name,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
                 ),
               ),
               if (item.description.isNotEmpty) ...[
                 const SizedBox(height: 2),
                 Text(
                   item.description,
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ],
@@ -486,7 +491,10 @@ class _MenuItemTile extends StatelessWidget {
         ),
         const SizedBox(width: 12),
         // Price on the right
-        Text(_formatPrice(item.price), style: const TextStyle(fontSize: 12)),
+        Text(
+          _formatPrice(item.price),
+          style: TextStyle(fontSize: 12, color: colorScheme.onSurface),
+        ),
       ],
     );
   }

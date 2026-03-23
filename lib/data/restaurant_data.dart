@@ -2,7 +2,7 @@ import '../models/restaurant.dart';
 import '../models/menu.dart';
 
 // Typed Restaurant objects for use in UI widgets.
-// Replace with database queries later.
+// There are used to seed the database on first run, but also provide a convenient way to work with restaurant data in the app without needing to query the database for every operation.
 final List<Restaurant> sampleRestaurants = [
   Restaurant(
     name: 'Baraka Shawarma',
@@ -113,6 +113,7 @@ final List<Restaurant> sampleRestaurants = [
       'international',
     ],
   ),
+  // Note: This restaurant contains more menu items than most others. This is because we were unable to populate the other restaurants with as many menu itmes.
   Restaurant(
     name: 'Land of a Thousand Hills Coffee',
     imagePath: 'assets/images/land_of_a_thousand_hills.jpg',
@@ -214,6 +215,7 @@ final List<Restaurant> sampleRestaurants = [
       'bored',
     ],
   ),
+  // Note: This restaurant contains more menu items than most others. This is because we were unable to populate the other restaurants with as many menu itmes.
   Restaurant(
     name: 'Café Lucia',
     imagePath: 'assets/images/cafe_lucia.jpg',

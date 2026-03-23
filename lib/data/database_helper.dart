@@ -40,6 +40,7 @@ class DatabaseHelper {
 
   // Create database tables (fresh install)
   Future _createDB(Database db, int version) async {
+    // Create restaurants table with columns for ID, name, image path, description, location, rating, hours, price level, cuisine type, tags, and vibe embedding.
     await db.execute('''
       CREATE TABLE restaurants (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -55,6 +56,7 @@ class DatabaseHelper {
       )
     ''');
 
+    // Create menu_items table with columns for ID, restaurant ID (foreign key), name, description, and price (stored as JSON string).
     await db.execute('''
       CREATE TABLE menu_items (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -66,6 +68,7 @@ class DatabaseHelper {
       )
     ''');
 
+    // Create favorites table with columns for ID, restaurant ID (foreign key), and timestamp of when the restaurant was favorited.
     await db.execute('''
       CREATE TABLE favorites (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -75,6 +78,7 @@ class DatabaseHelper {
       )
     ''');
 
+    // Create reviews table with columns for ID, restaurant ID (foreign key), written review text, numeric rating, reviewer's name, and timestamp of when the review was created.
     await db.execute('''
       CREATE TABLE reviews (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -87,6 +91,7 @@ class DatabaseHelper {
       )
     ''');
 
+    // Create users table with columns for ID, name, profile image path, and location.
     await db.execute('''
       CREATE TABLE users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -165,6 +170,7 @@ class DatabaseHelper {
   // Seeding
   // -------------------------------------------------------------------------
 
+  // Seeds the database with the sample restaurant data defined in restaurant_data.dart.
   Future<void> _seedRestaurantData(Database db) async {
     for (var restaurant in sampleRestaurants) {
       final restaurantId = await db.insert('restaurants', {
@@ -179,6 +185,7 @@ class DatabaseHelper {
         'tags': jsonEncode(restaurant.tags),
       });
 
+      // Insert menu items for the restaurant using a batch operation for efficiency.
       final batch = db.batch();
       for (var item in restaurant.menuItems) {
         batch.insert('menu_items', {

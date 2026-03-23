@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// The MenuItem model represents an individual menu item offered by a restaurant, including its name, description, and price. 
 class MenuItem {
   final int? id;
   final int? restaurantId;
@@ -7,6 +8,7 @@ class MenuItem {
   final String description;
   final List<double> price;
 
+  // Constructor for MenuItem, with optional id and restaurantId for database use.
   MenuItem({
     this.id,
     this.restaurantId,
@@ -15,6 +17,7 @@ class MenuItem {
     required this.price,
   });
 
+  // Converts the MenuItem instance into a Map for database storage, encoding the price list as a JSON string.
   Map<String, dynamic> toMap() {
     return {
       if (id != null) 'id': id,
@@ -25,6 +28,7 @@ class MenuItem {
     };
   }
 
+  // Factory constructor to create a MenuItem instance from a Map, decoding the price from a JSON string.
   factory MenuItem.fromMap(Map<String, dynamic> map) {
     List<double> parsedPrice = [];
     final rawPrice = map['price'];
@@ -34,6 +38,7 @@ class MenuItem {
           .toList();
     }
 
+    // Return a new MenuItem instance with the parsed values from the map.
     return MenuItem(
       id: map['id'] as int?,
       restaurantId: map['restaurant_id'] as int?,

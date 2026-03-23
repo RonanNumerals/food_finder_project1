@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:food_finder_project1/models/menu.dart';
 
+// The Restaurant model represents a dining establishment, including its name, image, menu items, description, hours, location, rating, price level, cuisine type, mood tags, and a pre-computed embedding vector for vibe-based recommendations.
 class Restaurant {
   final int? id;
   final String name;
@@ -15,6 +16,7 @@ class Restaurant {
   // Mood/vibe tags used for keyword matching (e.g. ['chill', 'cozy', 'study spot'])
   final List<String> tags;
 
+  // Constructor for Restaurant, with optional id for database use.
   Restaurant({
     this.id,
     required this.name,
@@ -31,6 +33,7 @@ class Restaurant {
 
   String get priceLabelString => '\$' * priceLevel;
 
+  // Converts the Restaurant instance into a Map for database storage, encoding lists as JSON strings.
   Map<String, dynamic> toMap() {
     return {
       if (id != null) 'id': id,
@@ -46,6 +49,7 @@ class Restaurant {
     };
   }
 
+  // Factory constructor to create a Restaurant instance from a Map, decoding lists from JSON strings.
   factory Restaurant.fromMap(
     Map<String, dynamic> map, {
     List<MenuItem> menuItems = const [],

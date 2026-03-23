@@ -32,7 +32,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 3,
+      version: 4,
       onCreate: _createDB,
       onUpgrade: _upgradeDB,
     );
@@ -52,8 +52,7 @@ class DatabaseHelper {
       hours TEXT,
       price_level INTEGER,
       cuisine TEXT,
-      tags TEXT,
-      vibe_embedding TEXT
+      tags TEXT
       )
     ''');
 
@@ -138,9 +137,32 @@ class DatabaseHelper {
 
     if (oldVersion < 3) {
       await db.execute('ALTER TABLE restaurants ADD COLUMN tags TEXT');
-      await db.execute(
-        'ALTER TABLE restaurants ADD COLUMN vibe_embedding TEXT',
-      );
+    }
+
+    if (oldVersion < 4) {
+      // Drop the unused vibe_embedding column. SQLite doesn't support
+      // DROP COLUMN before 3.35.0, so we recreate the table.
+      await db.execute('''
+        CREATE TABLE restaurants_new (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          image_path TEXT,
+          description TEXT,
+          location TEXT,
+          rating REAL,
+          hours TEXT,
+          price_level INTEGER,
+          cuisine TEXT,
+          tags TEXT
+        )
+      ''');
+      await db.execute('''
+        INSERT INTO restaurants_new (id, name, image_path, description, location, rating, hours, price_level, cuisine, tags)
+        SELECT id, name, image_path, description, location, rating, hours, price_level, cuisine, tags
+        FROM restaurants
+      ''');
+      await db.execute('DROP TABLE restaurants');
+      await db.execute('ALTER TABLE restaurants_new RENAME TO restaurants');
     }
   }
 
@@ -161,7 +183,6 @@ class DatabaseHelper {
         'price_level': restaurant.priceLevel,
         'cuisine': restaurant.cuisine,
         'tags': jsonEncode(restaurant.tags),
-        // vibe_embedding intentionally omitted -- computed later by EmbeddingService
       });
 
       // Insert menu items for the restaurant using a batch operation for efficiency.

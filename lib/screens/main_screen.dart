@@ -5,7 +5,14 @@ import 'vibe_screen.dart';
 import 'profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final bool isDarkMode;
+  final ValueChanged<bool> onThemeToggle;
+
+  const MainScreen({
+    super.key,
+    required this.isDarkMode,
+    required this.onThemeToggle,
+  });
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -31,7 +38,11 @@ class _MainScreenState extends State<MainScreen> {
         children: [
           const DiscoverScreen(),
           const VibeScreen(),
-          ProfileScreen(key: _profileKey),
+          ProfileScreen(
+            key: _profileKey,
+            isDarkMode: widget.isDarkMode,
+            onThemeToggle: widget.onThemeToggle,
+          ),
         ],
       ),
       bottomNavigationBar: NavigationBar(

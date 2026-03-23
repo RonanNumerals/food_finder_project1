@@ -357,6 +357,17 @@ class DatabaseHelper {
     return results;
   }
 
+  // READ - Get single restaurant by ID
+    Future<Map<String, dynamic>?> getRestaurant(int id) async {
+      final db = await database;
+      final results = await db.query(
+        'restaurants',
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      return results.isNotEmpty ? results.first : null;
+    }
+  
   // READ - Get single menu item by ID
   Future<Map<String, dynamic>?> getMenuItemById(int id) async {
     final db = await database;
@@ -377,17 +388,6 @@ class DatabaseHelper {
       whereArgs: [restaurantId],
     );
     return results;
-  }
-
-  // READ - Get single restaurant by ID
-  Future<Map<String, dynamic>?> getRestaurant(int id) async {
-    final db = await database;
-    final results = await db.query(
-      'restaurants',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-    return results.isNotEmpty ? results.first : null;
   }
 
   // Close database connection

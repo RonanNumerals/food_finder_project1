@@ -1,3 +1,4 @@
+// The Review model represents a user's review of a restaurant, including the review text, rating, reviewer's name, and timestamp.
 class Review {
   final int? id;
   final int restaurantId;
@@ -9,6 +10,7 @@ class Review {
   /// Populated by join queries only — not stored in the DB.
   final String? restaurantName;
 
+  // Constructor for Review.
   Review({
     this.id,
     required this.restaurantId,
@@ -19,6 +21,7 @@ class Review {
     this.restaurantName,
   });
 
+  // Converts the Review instance into a Map for database storage.
   Map<String, dynamic> toMap() {
     return {
       if (id != null) 'id': id,
@@ -30,6 +33,7 @@ class Review {
     };
   }
 
+  // Factory constructor to create a Review instance from a Map.
   factory Review.fromMap(Map<String, dynamic> map) {
     return Review(
       id: map['id'] as int?,

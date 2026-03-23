@@ -404,6 +404,21 @@ class DatabaseHelper {
   }
 
   // -------------------------------------------------------------------------
+  // RESTAURANTS – UTILITIES
+  // -------------------------------------------------------------------------
+
+  /// Returns the sorted list of distinct cuisine values stored in the database.
+  Future<List<String>> getDistinctCuisines() async {
+    final db = await database;
+    final rows = await db.rawQuery(
+      'SELECT DISTINCT cuisine FROM restaurants '
+      'WHERE cuisine IS NOT NULL AND cuisine != "" '
+      'ORDER BY cuisine ASC',
+    );
+    return rows.map((row) => row['cuisine'] as String).toList();
+  }
+
+  // -------------------------------------------------------------------------
   // USERS
   // -------------------------------------------------------------------------
 

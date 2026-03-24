@@ -714,13 +714,55 @@ final List<Restaurant> sampleRestaurants = [
             'Seasoned fries topped with cheddar cheese sauce, bacon bits, and jalapeños.',
         price: [6.99],
       ),
+      MenuItem(
+        name: 'BBQ Wings',
+        description:
+            '8 wings tossed in our signature spicy BBQ sauce. A perfect balance of sweet, smoky, and spicy flavors.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Lemon Pepper Wings',
+        description:
+            '8 wings tossed in a zesty lemon pepper sauce. Bright, tangy, and incredibly satisfying.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Mild Wings',
+        description:
+            '8 wings tossed in our mild, tangy sauce. Perfect for those who prefer a gentler flavor.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Hot Wings',
+        description:
+            '8 wings tossed in our signature spicy sauce. For those who like it hot!',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Cajun Ranch Wings',
+        description:
+            '8 wings tossed in our signature cajun ranch sauce. A perfect balance of spicy and creamy flavors.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Garlic Parm Wings',
+        description:
+            '8 wings tossed in a creamy garlic parmesan sauce. Rich, indulgent, and absolutely delicious.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Fried Oreos',
+        description:
+            'Crispy fried Oreos drizzled with chocolate sauce.',
+        price: [4.99],
+      ),
     ],
     description:
         'ATL\'s go-to spot for saucy, crispy wings with a side of good vibes. Whether you\'re watching the game or just hanging out, StrikeOut Wingz has the flavor to match the moment.',
     hours: 'Monday - Thursday: 11:00 AM - 10:00 PM, Friday - Saturday: 11:00 AM - 12:00 AM, Sunday: 12:00 PM - 9:00 PM',
     rating: 4.5,
     location: '60 Peachtree St NW, Atlanta, GA 30303',
-    priceLevel: 1,
+    priceLevel: 2,
     cuisine: 'American',
     tags: [
       'hangry',

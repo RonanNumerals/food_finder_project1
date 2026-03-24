@@ -797,6 +797,48 @@ final List<Restaurant> sampleRestaurants = [
             'Thick acai base topped with granola, fresh berries, banana, and a drizzle of honey.',
         price: [9.99],
       ),
+      MenuItem(
+        name: 'Honey Feta Peppadew',
+        description:
+            'Peppadew peppers, artichoke hearts, baby kale, cucumber and tomato tossed in a balsamic vinaigrette and topped with honey feta cheese.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Tahini Cucumber Feta',
+        description:
+            'Cucumber, tomato, chickpeas and feta cheese tossed in a earthly tahini dressing and za\'atar white balsamic vinaigrette.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Chipotle Mango Avacado',
+        description:
+            'Avacado, mango, black bean and corn tossed ina smoky chipotle cream sauce and topped lime vinaigrette.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Queso Verde Qeuso',
+        description:
+            'rosted corn, radish, cabbage, jalapeno and red onion tossed in a tomatillo and avacado verde dressing, house made poblano, and red pepper queso.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Sweet Soy Sriracha',
+        description:
+            'Snow pea, red bell peppers, purple cabbage, and carrot medley tossed in a sriracha ginger dressing and sweet japanese soy sauce.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Ginger Lime Peanut',
+        description:
+            'Red bell pepper, cabbage, cucumber, carrot, and roasted peanut medley tosse in a lime vinaigrette and ginger peanut sauce.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Polynesian Chili Mango',
+        description:
+            'Cabbage, carrot, red bell pepper, cucumber and herb-packed medley tossed in a creamy coconus dressing and house made polynesian chili mango sauce.',
+        price: [12.99],
+      ),
     ],
     description:
         'Fresh, feel-good food made with locally sourced ingredients. gusto! is for when you want something light, energizing, and actually good for you — without sacrificing taste.',

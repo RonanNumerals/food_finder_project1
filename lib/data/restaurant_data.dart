@@ -866,7 +866,7 @@ final List<Restaurant> sampleRestaurants = [
         name: 'Classic Cheese Pizza',
         description:
             'Hand-tossed dough with house marinara and a generous blanket of mozzarella. Simple and perfect.',
-        price: [8.99, 12.99],
+        price: [8.99],
       ),
       MenuItem(
         name: 'Pepperoni Overload',
@@ -879,6 +879,48 @@ final List<Restaurant> sampleRestaurants = [
         description:
             'Six buttery, garlicky knots baked fresh and served with marinara dipping sauce.',
         price: [4.99],
+      ),
+      MenuItem(
+        name: 'Small BBQ Chicken Pizza',
+        description:
+            'Signature BBQ sauce, smoked chicken breast, and whole milk mozzarella. A smoky, tangy twist on a classic.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Small Buffalo Chicken Pizza',
+        description:
+            'Signature mild buffalo sauce topped with slow-smoked chicken breast and whole-milk mozzarella cheese.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Small Veggie Pizza',
+        description:
+            'Premium blend of mozzarella and provolone cheese, house marinara sauce, and a colorful medley of fresh veggies.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Small Italian Steak Pizza',
+        description:
+            'White garlic sauce topped with steak, onions, mushrooms, and green peppers, finished with whole-milk mozzarella.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Small Chicken Bacon Ranch Pizza',
+        description:
+            'Topped with grilled chicken, crispy bacon, and ranch dressing, finished with whole-milk mozzarella.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Large Cheese Pizza',
+        description:
+            'Premium sauce and whole-milk mozzarella.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Large Pepperoni Pizza',
+        description:
+            'Premium sauce and whole-milk mozzarella cheese, topped with sliced pepperoni.',
+        price: [14.99],
       ),
     ],
     description:

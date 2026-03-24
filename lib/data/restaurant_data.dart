@@ -631,6 +631,48 @@ final List<Restaurant> sampleRestaurants = [
             'Lightly battered shrimp, deep fried until golden, served with tentsuyu dipping sauce.',
         price: [10.99],
       ),
+      MenuItem(
+        name: 'Chicken Teriyaki',
+        description:
+            'A generous portion of grilled chicken dark meat covered with our homemade teriyaki sauce and served with two sides of your choosing.',
+        price: [13.29],
+      ),
+      MenuItem(
+        name: 'Hibachi Steak',
+        description:
+            'Seasoned sirloin steak grilled to order, served with two sides of your choosing.',
+        price: [15.99],
+      ),
+      MenuItem(
+        name: 'Shrimp Teriyaki',
+        description:
+            'A generous portion of grilled shrimp covered with our homemade teriyaki sauce and served with two sides of your choosing.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Fried Hibachi Tofu',
+        description:
+            'Crispy tofu battered and fried, served with our signature hibachi sauce amd two sides of your choosing.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Steak & Shrimp',
+        description:
+            'Grilled beef steak and battered shrimp, deep fried until golden, served with tentsuyu dipping sauce. Served with two sides of your choosing.',
+        price: [15.99],
+      ),
+      MenuItem(
+        name: 'Chicken Katsu',
+        description:
+            'Crispy breaded chicken cutlet, served with our signature hibachi sauce and two sides of your choosing.',
+        price: [13.99],
+      ),
+      MenuItem(
+        name: 'Vegetable Lovers',
+        description:
+            'A medley of fresh, grilled vegetables with a side of our signature hibachi sauce. Served with one side of your choosing.',
+        price: [11.99],
+      ),
     ],
     description:
         'Bringing the hibachi grill experience to downtown Atlanta. Bold flavors, high heat, and generous portions — from sizzling steak to crispy tempura.',

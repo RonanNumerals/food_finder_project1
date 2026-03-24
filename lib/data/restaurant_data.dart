@@ -247,6 +247,48 @@ final List<Restaurant> sampleRestaurants = [
             'Build your own Rice Bowl. Start with Basmati Rice, choose your proteins and as many garnishes and chutneys as you like!',
         price: [9.99],
       ),
+      MenuItem(
+        name: 'Rice Bowl (Large)',
+        description:
+            'Build your own Rice Bowl. Start with Basmati Rice, choose your proteins and as many garnishes and chutneys as you like!',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Paneer Tikka Masala Bowl',
+        description:
+            'Grilled, marinated paneer in tomato cream sauce over Basmati rice with your choice of toppings.',
+        price: [12.00],
+      ),
+      MenuItem(
+        name: 'Punjabi Dal',
+        description:
+            'Yellow lentils cooked with tomatoes, onions, and spices.',
+        price: [11.00],
+      ),
+      MenuItem(
+        name: 'Kofta',
+        description:
+            'Indian Meatballs made with turkey.',
+        price: [6.00],
+      ),
+      MenuItem(
+        name: 'Gobi',
+        description:
+            'Cauliflower cooked with tomatoes, onions, and spices.',
+        price: [0.99],
+      ),
+      MenuItem(
+        name: 'Lamb Naan Wrap',
+        description:
+            'Grilled, marinated lamb in tomato cream sauce wrapped in a warm naan with your choice of toppings.',
+        price: [12.00],
+      ),
+      MenuItem(
+        name: 'Chola Naan Wrap',
+        description:
+            'Chickpeas cooked with tomatoes, onions, and spices wrapped in a warm naan with your choice of toppings.',
+        price: [12.00],
+      ),
     ],
     description:
         'At NaanStop, we want to make Indian food accessible to everyone. All of our recipes have been passed down from our grandmother to our mom to us.',

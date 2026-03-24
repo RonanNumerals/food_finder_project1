@@ -53,6 +53,72 @@ final List<Restaurant> sampleRestaurants = [
             'Sliced grilled chicken breast nestled in a fresh mix of green leaf lettuce with a blend of shredded Monterey Jack and Cheddar cheeses, tightly rolled in a flaxseed flour flat bread. Made fresh daily. Pairs well with Avocado Lime Ranch dressing.',
         price: [7.29],
       ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Biscuit',
+        description:
+            'Our original recipe for almost 60 years. A boneless breast of chicken seasoned to perfection, freshly breaded, pressure cooked in 100% refined peanut oil and served on a warm, flaky buttermilk biscuit.',
+        price: [3.75],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Deluxe Sandwich',
+        description:
+            'Our original recipe for almost 60 years. A boneless breast of chicken seasoned to perfection, freshly breaded, pressure cooked in 100% refined peanut oil and served on a toasted, buttery bun with dill pickle chips, green leaf lettuce, tomato and American cheese.',
+        price: [4.79],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Sandwich',
+        description:
+            'A boneless breast of chicken, marinated with a special blend of seasonings and grilled for a tender and juicy backyard-smoky taste. Served on a toasted, buttery bun with green leaf lettuce and tomato.',
+        price: [5.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Nuggets',
+        description:
+            'Bite-sized pieces of boneless chicken breast, marinated with a special blend of seasonings and grilled for a tender and juicy backyard-smoky taste. Available with choice of dipping sauce.',
+        price: [4.95, 6.95],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Cool Wrap',
+        description:
+            'Sliced grilled chicken breast nestled in a fresh mix of green leaf lettuce with a blend of shredded Monterey Jack and Cheddar cheeses, tightly rolled in a flaxseed flour flat bread. Made fresh daily. Pairs well with Avocado Lime Ranch dressing.',
+        price: [7.79],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Strips',
+        description:
+            'Hand-breaded chicken breast strips, seasoned to perfection, freshly breaded and pressure cooked in 100% refined peanut oil. Available with choice of dipping sauce.',
+        price: [4.95, 6.95],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Strips',
+        description:
+            'Hand-breaded chicken breast strips, marinated with a special blend of seasonings and grilled for a tender and juicy backyard-smoky taste. Available with choice of dipping sauce.',
+        price: [5.95, 7.95],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Salad',
+        description:
+            'Chopped Chick-fil-A Nuggets, chopped eggs, celery and relish with a blend of seasonings and mayonnaise. Served on a bed of fresh greens.',
+        price: [5.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Salad',
+        description:
+            'Sliced grilled chicken breast, chopped eggs, celery and relish with a blend of seasonings and mayonnaise. Served on a bed of fresh greens.',
+        price: [6.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Cobb Salad',
+        description:
+            'Sliced grilled chicken breast, chopped eggs, green leaf lettuce, grape tomatoes, shredded Monterey Jack and Cheddar cheeses, crumbled bacon and charred corn with a blend of seasonings and mayonnaise. Served on a bed of fresh greens.',
+        price: [7.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Spicy Chicken Sandwich',
+        description:
+            'A boneless breast of chicken seasoned with a spicy blend of peppers, freshly breaded, pressure cooked in 100% refined peanut oil and served on a toasted, buttery bun with dill pickle chips.',
+        price: [4.29],
+      ),
     ],
     description:
         'Whether you\'re hungry for a Chick-fil-A® Chicken Sandwich or salads made fresh daily, we\'re here to serve you delicious food made with quality ingredients every day (except Sunday).',
@@ -113,7 +179,6 @@ final List<Restaurant> sampleRestaurants = [
       'international',
     ],
   ),
-  // Note: This restaurant contains more menu items than most others. This is because we were unable to populate the other restaurants with as many menu itmes.
   Restaurant(
     name: 'Land of a Thousand Hills Coffee',
     imagePath: 'assets/images/land_of_a_thousand_hills.jpg',
@@ -215,7 +280,6 @@ final List<Restaurant> sampleRestaurants = [
       'bored',
     ],
   ),
-  // Note: This restaurant contains more menu items than most others. This is because we were unable to populate the other restaurants with as many menu itmes.
   Restaurant(
     name: 'Café Lucia',
     imagePath: 'assets/images/cafe_lucia.jpg',

@@ -8,16 +8,103 @@ final List<Restaurant> sampleRestaurants = [
     name: 'Baraka Shawarma',
     imagePath: 'assets/images/baraka_shawarma.webp',
     menuItems: [
-      MenuItem(name: 'Gyro Shawarma', description: '', price: [8.49, 10.49]),
-      MenuItem(name: 'Falafel', description: '', price: [7.99, 9.99]),
-      MenuItem(name: 'Chicken Shawarma Plate', description: '', price: [13.99]),
+      MenuItem(
+        name: 'Gyro Shawarma', 
+        description: 
+            'A delicious Mediterranean dish featuring seasoned gyro meat, fresh vegetables, and our signature sauce. Served in a warm pita bread for the perfect handheld meal.', 
+        price: [8.49, 10.49]
+      ),
+      MenuItem(
+        name: 'Falafel', 
+        description: 
+            'Crispy chickpea fritters seasoned with herbs and spices, served with tahini sauce.', 
+        price: [7.99, 9.99]
+      ),
+      MenuItem(
+        name: 'Chicken Shawarma Plate', 
+        description: 
+            'Tender chicken shawarma served with fries and soft drink.', 
+        price: [13.99]
+      ),
+      MenuItem(
+        name: 'Beef Shawarma Plate', 
+        description: 
+            'Juicy beef shawarma served with fries and soft drink.', 
+        price: [14.99]
+      ),
+      MenuItem(
+        name: 'Lamb Shawarma Plate', 
+        description: 
+            'Savory lamb shawarma served with fries and soft drink.', 
+        price: [15.99]
+      ),
+      MenuItem(
+        name: 'Greek Salad', 
+        description: 
+            'A refreshing salad featuring crisp romaine lettuce, tomatoes, cucumbers, red onions, and our signature Greek dressing.', 
+        price: [8.99]
+      ),
+      MenuItem(
+        name: 'French Fries reg.', 
+        description: 
+            'Crispy french fries.', 
+        price: [3.11]
+      ),
+      MenuItem(
+        name: 'Falafel Salad', 
+        description: 
+            'Crispy chickpea fritters seasoned with herbs and spices, served with tahini sauce.', 
+        price: [14.55]
+      ),
+      MenuItem(
+        name: 'Hummus Plate', 
+        description: 
+            'Creamy hummus served with warm pita bread and fresh vegetables.', 
+        price: [9.99]
+      ),
+      MenuItem(
+        name: 'Baba Ganoush', 
+        description: 
+            'Smoky baba ganoush served with warm pita bread and fresh vegetables.', 
+        price: [6.23]
+      ),
+      MenuItem(
+        name: 'Baklava', 
+        description: 
+            'Sheets of fila with walnuts and sweetened with syrup.', 
+        price: [2.59]
+      ),
+      MenuItem(
+        name: 'Soft Drink', 
+        description: 
+            'Coke, Diet Coke, Sprite, or Fanta.', 
+        price: [1.99]
+      ),
+      MenuItem(
+        name: 'Lamb Shank Plate', 
+        description: 
+            'Served with basmati rice, green house salad, pita bread, and sauce.', 
+        price: [22.87]
+      ),
+      MenuItem(
+        name: 'Lamb Shish Kebab Plate', 
+        description: 
+            'Served with basmati rice, green house salad, pita bread, and sauce.', 
+        price: [20.79]
+      ),
+      MenuItem(
+        name: 'Chicken Shish Kebab Plate', 
+        description: 
+            'Served with basmati rice, green house salad, pita bread, and sauce.', 
+        price: [18.99]
+      ),
     ],
     description:
         'Welcome to Baraka Shawarma, where tradition meets freshness! We bring you the rich and authentic flavors of Mediterranean cuisine, made with only the finest ingredients. Our goal is simple—to serve delicious, high-quality food that keeps our customers coming back for more.',
     hours: 'Sunday - Thursday: 11:00 AM - 10:00 PM',
     rating: 4.6,
     location: '68 Walton Street Northwest, Atlanta, GA, 30303',
-    priceLevel: 1,
+    priceLevel: 3,
     cuisine: 'Mediterranean',
     tags: [
       'quick bite',

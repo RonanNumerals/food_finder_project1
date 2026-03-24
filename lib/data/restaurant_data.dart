@@ -549,6 +549,48 @@ final List<Restaurant> sampleRestaurants = [
             'Homestyle beef meatballs smothered in marinara sauce and melted mozzarella on a toasted hoagie.',
         price: [8.49, 10.99],
       ),
+      MenuItem(
+        name: 'Ham Swiss',
+        description:
+            'Sliced ham, Swiss cheese, lettuce, tomato, and honey mustard on a soft hoagie roll.',
+        price: [7.99, 9.99],
+      ),
+      MenuItem(
+        name: 'Tuna Sub',
+        description:
+            'Tuna salad with mayonnaise, lettuce, and tomato on a soft hoagie roll.',
+        price: [7.99, 9.99],
+      ),
+      MenuItem(
+        name: 'American Sub',
+        description:
+            'Sliced turkey, ham, provolone, lettuce, tomato, and mayo on a soft hoagie roll.',
+        price: [8.99, 11.99],
+      ),
+      MenuItem(
+        name: 'Smoked Turkey Sub',
+        description:
+            'Sliced smoked turkey, Swiss cheese, lettuce, tomato, and mayo on a soft hoagie roll.',
+        price: [8.99, 11.99],
+      ),
+      MenuItem(
+        name: 'Crab Salad Sub (Imitation)',
+        description:
+            'A delicious imitation crab salad with mayonnaise, lettuce, and tomato on a soft hoagie roll.',
+        price: [8.99, 11.99],
+      ),
+      MenuItem(
+        name: 'Cheese Sub',
+        description:
+            'Swiss, Provolone, and American on a soft hoagie roll.',
+        price: [7.99, 9.99],
+      ),
+      MenuItem(
+        name: 'Meatball and Provolone Sub',
+        description:
+            'Homestyle beef meatballs smothered in marinara sauce and melted mozzarella on a toasted hoagie.',
+        price: [8.49, 10.99],
+      ),
     ],
     description:
         'A no-frills sub shop serving overstuffed sandwiches with fresh-baked bread and quality ingredients. Quick, filling, and easy on the wallet — perfect for a grab-and-go lunch.',

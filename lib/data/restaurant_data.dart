@@ -8,16 +8,103 @@ final List<Restaurant> sampleRestaurants = [
     name: 'Baraka Shawarma',
     imagePath: 'assets/images/baraka_shawarma.webp',
     menuItems: [
-      MenuItem(name: 'Gyro Shawarma', description: '', price: [8.49, 10.49]),
-      MenuItem(name: 'Falafel', description: '', price: [7.99, 9.99]),
-      MenuItem(name: 'Chicken Shawarma Plate', description: '', price: [13.99]),
+      MenuItem(
+        name: 'Gyro Shawarma', 
+        description: 
+            'A delicious Mediterranean dish featuring seasoned gyro meat, fresh vegetables, and our signature sauce. Served in a warm pita bread for the perfect handheld meal.', 
+        price: [8.49, 10.49]
+      ),
+      MenuItem(
+        name: 'Falafel', 
+        description: 
+            'Crispy chickpea fritters seasoned with herbs and spices, served with tahini sauce.', 
+        price: [7.99, 9.99]
+      ),
+      MenuItem(
+        name: 'Chicken Shawarma Plate', 
+        description: 
+            'Tender chicken shawarma served with fries and soft drink.', 
+        price: [13.99]
+      ),
+      MenuItem(
+        name: 'Beef Shawarma Plate', 
+        description: 
+            'Juicy beef shawarma served with fries and soft drink.', 
+        price: [14.99]
+      ),
+      MenuItem(
+        name: 'Lamb Shawarma Plate', 
+        description: 
+            'Savory lamb shawarma served with fries and soft drink.', 
+        price: [15.99]
+      ),
+      MenuItem(
+        name: 'Greek Salad', 
+        description: 
+            'A refreshing salad featuring crisp romaine lettuce, tomatoes, cucumbers, red onions, and our signature Greek dressing.', 
+        price: [8.99]
+      ),
+      MenuItem(
+        name: 'French Fries reg.', 
+        description: 
+            'Crispy french fries.', 
+        price: [3.11]
+      ),
+      MenuItem(
+        name: 'Falafel Salad', 
+        description: 
+            'Crispy chickpea fritters seasoned with herbs and spices, served with tahini sauce.', 
+        price: [14.55]
+      ),
+      MenuItem(
+        name: 'Hummus Plate', 
+        description: 
+            'Creamy hummus served with warm pita bread and fresh vegetables.', 
+        price: [9.99]
+      ),
+      MenuItem(
+        name: 'Baba Ganoush', 
+        description: 
+            'Smoky baba ganoush served with warm pita bread and fresh vegetables.', 
+        price: [6.23]
+      ),
+      MenuItem(
+        name: 'Baklava', 
+        description: 
+            'Sheets of fila with walnuts and sweetened with syrup.', 
+        price: [2.59]
+      ),
+      MenuItem(
+        name: 'Soft Drink', 
+        description: 
+            'Coke, Diet Coke, Sprite, or Fanta.', 
+        price: [1.99]
+      ),
+      MenuItem(
+        name: 'Lamb Shank Plate', 
+        description: 
+            'Served with basmati rice, green house salad, pita bread, and sauce.', 
+        price: [22.87]
+      ),
+      MenuItem(
+        name: 'Lamb Shish Kebab Plate', 
+        description: 
+            'Served with basmati rice, green house salad, pita bread, and sauce.', 
+        price: [20.79]
+      ),
+      MenuItem(
+        name: 'Chicken Shish Kebab Plate', 
+        description: 
+            'Served with basmati rice, green house salad, pita bread, and sauce.', 
+        price: [18.99]
+      ),
     ],
     description:
         'Welcome to Baraka Shawarma, where tradition meets freshness! We bring you the rich and authentic flavors of Mediterranean cuisine, made with only the finest ingredients. Our goal is simple—to serve delicious, high-quality food that keeps our customers coming back for more.',
     hours: 'Sunday - Thursday: 11:00 AM - 10:00 PM',
     rating: 4.6,
     location: '68 Walton Street Northwest, Atlanta, GA, 30303',
-    priceLevel: 1,
+    priceLevel: 3,
     cuisine: 'Mediterranean',
     tags: [
       'quick bite',
@@ -52,6 +139,72 @@ final List<Restaurant> sampleRestaurants = [
         description:
             'Sliced grilled chicken breast nestled in a fresh mix of green leaf lettuce with a blend of shredded Monterey Jack and Cheddar cheeses, tightly rolled in a flaxseed flour flat bread. Made fresh daily. Pairs well with Avocado Lime Ranch dressing.',
         price: [7.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Biscuit',
+        description:
+            'Our original recipe for almost 60 years. A boneless breast of chicken seasoned to perfection, freshly breaded, pressure cooked in 100% refined peanut oil and served on a warm, flaky buttermilk biscuit.',
+        price: [3.75],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Deluxe Sandwich',
+        description:
+            'Our original recipe for almost 60 years. A boneless breast of chicken seasoned to perfection, freshly breaded, pressure cooked in 100% refined peanut oil and served on a toasted, buttery bun with dill pickle chips, green leaf lettuce, tomato and American cheese.',
+        price: [4.79],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Sandwich',
+        description:
+            'A boneless breast of chicken, marinated with a special blend of seasonings and grilled for a tender and juicy backyard-smoky taste. Served on a toasted, buttery bun with green leaf lettuce and tomato.',
+        price: [5.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Nuggets',
+        description:
+            'Bite-sized pieces of boneless chicken breast, marinated with a special blend of seasonings and grilled for a tender and juicy backyard-smoky taste. Available with choice of dipping sauce.',
+        price: [4.95, 6.95],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Cool Wrap',
+        description:
+            'Sliced grilled chicken breast nestled in a fresh mix of green leaf lettuce with a blend of shredded Monterey Jack and Cheddar cheeses, tightly rolled in a flaxseed flour flat bread. Made fresh daily. Pairs well with Avocado Lime Ranch dressing.',
+        price: [7.79],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Strips',
+        description:
+            'Hand-breaded chicken breast strips, seasoned to perfection, freshly breaded and pressure cooked in 100% refined peanut oil. Available with choice of dipping sauce.',
+        price: [4.95, 6.95],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Strips',
+        description:
+            'Hand-breaded chicken breast strips, marinated with a special blend of seasonings and grilled for a tender and juicy backyard-smoky taste. Available with choice of dipping sauce.',
+        price: [5.95, 7.95],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Chicken Salad',
+        description:
+            'Chopped Chick-fil-A Nuggets, chopped eggs, celery and relish with a blend of seasonings and mayonnaise. Served on a bed of fresh greens.',
+        price: [5.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Grilled Chicken Salad',
+        description:
+            'Sliced grilled chicken breast, chopped eggs, celery and relish with a blend of seasonings and mayonnaise. Served on a bed of fresh greens.',
+        price: [6.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Cobb Salad',
+        description:
+            'Sliced grilled chicken breast, chopped eggs, green leaf lettuce, grape tomatoes, shredded Monterey Jack and Cheddar cheeses, crumbled bacon and charred corn with a blend of seasonings and mayonnaise. Served on a bed of fresh greens.',
+        price: [7.29],
+      ),
+      MenuItem(
+        name: 'Chick-fil-A Spicy Chicken Sandwich',
+        description:
+            'A boneless breast of chicken seasoned with a spicy blend of peppers, freshly breaded, pressure cooked in 100% refined peanut oil and served on a toasted, buttery bun with dill pickle chips.',
+        price: [4.29],
       ),
     ],
     description:
@@ -94,6 +247,48 @@ final List<Restaurant> sampleRestaurants = [
             'Build your own Rice Bowl. Start with Basmati Rice, choose your proteins and as many garnishes and chutneys as you like!',
         price: [9.99],
       ),
+      MenuItem(
+        name: 'Rice Bowl (Large)',
+        description:
+            'Build your own Rice Bowl. Start with Basmati Rice, choose your proteins and as many garnishes and chutneys as you like!',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Paneer Tikka Masala Bowl',
+        description:
+            'Grilled, marinated paneer in tomato cream sauce over Basmati rice with your choice of toppings.',
+        price: [12.00],
+      ),
+      MenuItem(
+        name: 'Punjabi Dal',
+        description:
+            'Yellow lentils cooked with tomatoes, onions, and spices.',
+        price: [11.00],
+      ),
+      MenuItem(
+        name: 'Kofta',
+        description:
+            'Indian Meatballs made with turkey.',
+        price: [6.00],
+      ),
+      MenuItem(
+        name: 'Gobi',
+        description:
+            'Cauliflower cooked with tomatoes, onions, and spices.',
+        price: [0.99],
+      ),
+      MenuItem(
+        name: 'Lamb Naan Wrap',
+        description:
+            'Grilled, marinated lamb in tomato cream sauce wrapped in a warm naan with your choice of toppings.',
+        price: [12.00],
+      ),
+      MenuItem(
+        name: 'Chola Naan Wrap',
+        description:
+            'Chickpeas cooked with tomatoes, onions, and spices wrapped in a warm naan with your choice of toppings.',
+        price: [12.00],
+      ),
     ],
     description:
         'At NaanStop, we want to make Indian food accessible to everyone. All of our recipes have been passed down from our grandmother to our mom to us.',
@@ -113,7 +308,6 @@ final List<Restaurant> sampleRestaurants = [
       'international',
     ],
   ),
-  // Note: This restaurant contains more menu items than most others. This is because we were unable to populate the other restaurants with as many menu itmes.
   Restaurant(
     name: 'Land of a Thousand Hills Coffee',
     imagePath: 'assets/images/land_of_a_thousand_hills.jpg',
@@ -215,7 +409,6 @@ final List<Restaurant> sampleRestaurants = [
       'bored',
     ],
   ),
-  // Note: This restaurant contains more menu items than most others. This is because we were unable to populate the other restaurants with as many menu itmes.
   Restaurant(
     name: 'Café Lucia',
     imagePath: 'assets/images/cafe_lucia.jpg',
@@ -356,6 +549,48 @@ final List<Restaurant> sampleRestaurants = [
             'Homestyle beef meatballs smothered in marinara sauce and melted mozzarella on a toasted hoagie.',
         price: [8.49, 10.99],
       ),
+      MenuItem(
+        name: 'Ham Swiss',
+        description:
+            'Sliced ham, Swiss cheese, lettuce, tomato, and honey mustard on a soft hoagie roll.',
+        price: [7.99, 9.99],
+      ),
+      MenuItem(
+        name: 'Tuna Sub',
+        description:
+            'Tuna salad with mayonnaise, lettuce, and tomato on a soft hoagie roll.',
+        price: [7.99, 9.99],
+      ),
+      MenuItem(
+        name: 'American Sub',
+        description:
+            'Sliced turkey, ham, provolone, lettuce, tomato, and mayo on a soft hoagie roll.',
+        price: [8.99, 11.99],
+      ),
+      MenuItem(
+        name: 'Smoked Turkey Sub',
+        description:
+            'Sliced smoked turkey, Swiss cheese, lettuce, tomato, and mayo on a soft hoagie roll.',
+        price: [8.99, 11.99],
+      ),
+      MenuItem(
+        name: 'Crab Salad Sub (Imitation)',
+        description:
+            'A delicious imitation crab salad with mayonnaise, lettuce, and tomato on a soft hoagie roll.',
+        price: [8.99, 11.99],
+      ),
+      MenuItem(
+        name: 'Cheese Sub',
+        description:
+            'Swiss, Provolone, and American on a soft hoagie roll.',
+        price: [7.99, 9.99],
+      ),
+      MenuItem(
+        name: 'Meatball and Provolone Sub',
+        description:
+            'Homestyle beef meatballs smothered in marinara sauce and melted mozzarella on a toasted hoagie.',
+        price: [8.49, 10.99],
+      ),
     ],
     description:
         'A no-frills sub shop serving overstuffed sandwiches with fresh-baked bread and quality ingredients. Quick, filling, and easy on the wallet — perfect for a grab-and-go lunch.',
@@ -395,6 +630,48 @@ final List<Restaurant> sampleRestaurants = [
         description:
             'Lightly battered shrimp, deep fried until golden, served with tentsuyu dipping sauce.',
         price: [10.99],
+      ),
+      MenuItem(
+        name: 'Chicken Teriyaki',
+        description:
+            'A generous portion of grilled chicken dark meat covered with our homemade teriyaki sauce and served with two sides of your choosing.',
+        price: [13.29],
+      ),
+      MenuItem(
+        name: 'Hibachi Steak',
+        description:
+            'Seasoned sirloin steak grilled to order, served with two sides of your choosing.',
+        price: [15.99],
+      ),
+      MenuItem(
+        name: 'Shrimp Teriyaki',
+        description:
+            'A generous portion of grilled shrimp covered with our homemade teriyaki sauce and served with two sides of your choosing.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Fried Hibachi Tofu',
+        description:
+            'Crispy tofu battered and fried, served with our signature hibachi sauce amd two sides of your choosing.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Steak & Shrimp',
+        description:
+            'Grilled beef steak and battered shrimp, deep fried until golden, served with tentsuyu dipping sauce. Served with two sides of your choosing.',
+        price: [15.99],
+      ),
+      MenuItem(
+        name: 'Chicken Katsu',
+        description:
+            'Crispy breaded chicken cutlet, served with our signature hibachi sauce and two sides of your choosing.',
+        price: [13.99],
+      ),
+      MenuItem(
+        name: 'Vegetable Lovers',
+        description:
+            'A medley of fresh, grilled vegetables with a side of our signature hibachi sauce. Served with one side of your choosing.',
+        price: [11.99],
       ),
     ],
     description:
@@ -437,13 +714,55 @@ final List<Restaurant> sampleRestaurants = [
             'Seasoned fries topped with cheddar cheese sauce, bacon bits, and jalapeños.',
         price: [6.99],
       ),
+      MenuItem(
+        name: 'BBQ Wings',
+        description:
+            '8 wings tossed in our signature spicy BBQ sauce. A perfect balance of sweet, smoky, and spicy flavors.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Lemon Pepper Wings',
+        description:
+            '8 wings tossed in a zesty lemon pepper sauce. Bright, tangy, and incredibly satisfying.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Mild Wings',
+        description:
+            '8 wings tossed in our mild, tangy sauce. Perfect for those who prefer a gentler flavor.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Hot Wings',
+        description:
+            '8 wings tossed in our signature spicy sauce. For those who like it hot!',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Cajun Ranch Wings',
+        description:
+            '8 wings tossed in our signature cajun ranch sauce. A perfect balance of spicy and creamy flavors.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Garlic Parm Wings',
+        description:
+            '8 wings tossed in a creamy garlic parmesan sauce. Rich, indulgent, and absolutely delicious.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Fried Oreos',
+        description:
+            'Crispy fried Oreos drizzled with chocolate sauce.',
+        price: [4.99],
+      ),
     ],
     description:
         'ATL\'s go-to spot for saucy, crispy wings with a side of good vibes. Whether you\'re watching the game or just hanging out, StrikeOut Wingz has the flavor to match the moment.',
     hours: 'Monday - Thursday: 11:00 AM - 10:00 PM, Friday - Saturday: 11:00 AM - 12:00 AM, Sunday: 12:00 PM - 9:00 PM',
     rating: 4.5,
     location: '60 Peachtree St NW, Atlanta, GA 30303',
-    priceLevel: 1,
+    priceLevel: 2,
     cuisine: 'American',
     tags: [
       'hangry',
@@ -478,6 +797,48 @@ final List<Restaurant> sampleRestaurants = [
             'Thick acai base topped with granola, fresh berries, banana, and a drizzle of honey.',
         price: [9.99],
       ),
+      MenuItem(
+        name: 'Honey Feta Peppadew',
+        description:
+            'Peppadew peppers, artichoke hearts, baby kale, cucumber and tomato tossed in a balsamic vinaigrette and topped with honey feta cheese.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Tahini Cucumber Feta',
+        description:
+            'Cucumber, tomato, chickpeas and feta cheese tossed in a earthly tahini dressing and za\'atar white balsamic vinaigrette.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Chipotle Mango Avacado',
+        description:
+            'Avacado, mango, black bean and corn tossed ina smoky chipotle cream sauce and topped lime vinaigrette.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Queso Verde Qeuso',
+        description:
+            'rosted corn, radish, cabbage, jalapeno and red onion tossed in a tomatillo and avacado verde dressing, house made poblano, and red pepper queso.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Sweet Soy Sriracha',
+        description:
+            'Snow pea, red bell peppers, purple cabbage, and carrot medley tossed in a sriracha ginger dressing and sweet japanese soy sauce.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Ginger Lime Peanut',
+        description:
+            'Red bell pepper, cabbage, cucumber, carrot, and roasted peanut medley tosse in a lime vinaigrette and ginger peanut sauce.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Polynesian Chili Mango',
+        description:
+            'Cabbage, carrot, red bell pepper, cucumber and herb-packed medley tossed in a creamy coconus dressing and house made polynesian chili mango sauce.',
+        price: [12.99],
+      ),
     ],
     description:
         'Fresh, feel-good food made with locally sourced ingredients. gusto! is for when you want something light, energizing, and actually good for you — without sacrificing taste.',
@@ -505,7 +866,7 @@ final List<Restaurant> sampleRestaurants = [
         name: 'Classic Cheese Pizza',
         description:
             'Hand-tossed dough with house marinara and a generous blanket of mozzarella. Simple and perfect.',
-        price: [8.99, 12.99],
+        price: [8.99],
       ),
       MenuItem(
         name: 'Pepperoni Overload',
@@ -518,6 +879,48 @@ final List<Restaurant> sampleRestaurants = [
         description:
             'Six buttery, garlicky knots baked fresh and served with marinara dipping sauce.',
         price: [4.99],
+      ),
+      MenuItem(
+        name: 'Small BBQ Chicken Pizza',
+        description:
+            'Signature BBQ sauce, smoked chicken breast, and whole milk mozzarella. A smoky, tangy twist on a classic.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Small Buffalo Chicken Pizza',
+        description:
+            'Signature mild buffalo sauce topped with slow-smoked chicken breast and whole-milk mozzarella cheese.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Small Veggie Pizza',
+        description:
+            'Premium blend of mozzarella and provolone cheese, house marinara sauce, and a colorful medley of fresh veggies.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Small Italian Steak Pizza',
+        description:
+            'White garlic sauce topped with steak, onions, mushrooms, and green peppers, finished with whole-milk mozzarella.',
+        price: [11.99],
+      ),
+      MenuItem(
+        name: 'Small Chicken Bacon Ranch Pizza',
+        description:
+            'Topped with grilled chicken, crispy bacon, and ranch dressing, finished with whole-milk mozzarella.',
+        price: [8.99],
+      ),
+      MenuItem(
+        name: 'Large Cheese Pizza',
+        description:
+            'Premium sauce and whole-milk mozzarella.',
+        price: [12.99],
+      ),
+      MenuItem(
+        name: 'Large Pepperoni Pizza',
+        description:
+            'Premium sauce and whole-milk mozzarella cheese, topped with sliced pepperoni.',
+        price: [14.99],
       ),
     ],
     description:
